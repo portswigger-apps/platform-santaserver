@@ -64,6 +64,14 @@ SantaServer is a management server for Google's Santa (macOS security agent), pr
 - Use the Context7 MCP if available
 - use conventional commits for any git commit messages
 
+## File Naming Conventions
+
+**PRD (Product Requirements Document) Files:**
+- Location: `.prds/` directory
+- Format: `{number}-{descriptive-name}.md`
+- Examples: `001-single-container-architecture-migration.md`, `002-read-only-filesystem-nginx-tmp.md`
+- Numbering: Sequential starting from 001, zero-padded to 3 digits
+
 ## Project Status
 
 This project is in early development phase. The core architecture has been defined but implementation is pending. When developing:
