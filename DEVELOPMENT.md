@@ -2,9 +2,26 @@
 
 This guide covers development workflows, testing, and contribution guidelines for SantaServer.
 
+## Architecture Overview
+
+SantaServer uses a **unified container architecture** that consolidates nginx, FastAPI backend, and frontend static assets into a single container for simplified deployment and improved performance.
+
+### Container Architecture
+- **Single Unified Container**: nginx + uvicorn (FastAPI) + static assets
+- **Communication**: Unix socket between nginx and FastAPI (`/tmp/sockets/uvicorn.sock`)
+- **Process Management**: Supervisor managing both nginx and uvicorn processes
+- **Database**: Separate PostgreSQL 17+ container
+- **Security**: All processes run as non-root nginx user (UID 101)
+
 ## Development Environment
 
 ### Initial Setup
+
+**Prerequisites**:
+- [uv](https://docs.astral.sh/uv/) - Python package and project manager
+- Docker & Docker Compose
+- Node.js 18+ for frontend
+- [Yarn](https://yarnpkg.com/) - Package manager for frontend dependencies
 
 1. **Clone and Setup**:
    ```bash
@@ -35,6 +52,11 @@ This guide covers development workflows, testing, and contribution guidelines fo
 
 #### Backend Development (Python/FastAPI)
 
+**Python Environment**:
+- Python 3.13+ with uv for dependency management
+- Virtual environment automatically managed by uv
+- Dependencies defined in `pyproject.toml`
+
 **File Structure**:
 ```
 backend/app/
@@ -46,6 +68,22 @@ backend/app/
 └── services/          # Business logic layer
 ```
 
+**Dependency Management with uv**:
+```bash
+# Install/sync dependencies (automatically creates .venv)
+cd backend && uv sync
+
+# Add new dependency
+cd backend && uv add package-name
+
+# Add development dependency
+cd backend && uv add --dev package-name
+
+# Run commands in uv environment
+cd backend && uv run python script.py
+cd backend && uv run pytest
+```
+
 **Testing (TDD Approach)**:
 ```bash
 # Run all tests
@@ -55,7 +93,7 @@ make test
 make test-watch
 
 # Test specific module
-cd backend && python -m pytest tests/test_health.py -v
+cd backend && uv run pytest tests/test_health.py -v
 ```
 
 **Code Quality**:
@@ -67,7 +105,7 @@ make format-backend
 make lint-backend
 
 # Type checking
-cd backend && mypy app/
+cd backend && uv run mypy app/
 ```
 
 **Database Management**:
@@ -76,10 +114,15 @@ cd backend && mypy app/
 make shell-db
 
 # Run migrations (when implemented)
-cd backend && alembic upgrade head
+cd backend && uv run alembic upgrade head
 ```
 
 #### Frontend Development (TypeScript/Svelte)
+
+**Package Management**:
+- Uses Yarn for better dependency resolution and lockfile consistency
+- Yarn chosen over npm for improved handling of peer dependency conflicts
+- Lockfile (`yarn.lock`) ensures reproducible installs across environments
 
 **File Structure**:
 ```
@@ -94,7 +137,13 @@ frontend/src/
 **Development Commands**:
 ```bash
 # Install dependencies
-cd frontend && npm install
+cd frontend && yarn install
+
+# Add new dependency
+cd frontend && yarn add package-name
+
+# Add development dependency
+cd frontend && yarn add -D package-name
 
 # Format code
 make format-frontend
@@ -103,7 +152,7 @@ make format-frontend
 make lint-frontend
 
 # Type checking
-cd frontend && npm run check
+cd frontend && yarn run check
 ```
 
 ### Docker Development
@@ -229,13 +278,13 @@ class ApprovalRead(ApprovalBase):
 **Alembic Setup** (when implemented):
 ```bash
 # Generate migration
-cd backend && alembic revision --autogenerate -m "Add approval table"
+cd backend && uv run alembic revision --autogenerate -m "Add approval table"
 
 # Run migrations
-cd backend && alembic upgrade head
+cd backend && uv run alembic upgrade head
 
 # Rollback migration
-cd backend && alembic downgrade -1
+cd backend && uv run alembic downgrade -1
 ```
 
 ## Authentication Development
@@ -370,8 +419,9 @@ make prod-up
 
 **Frontend build fails**:
 1. Check Node.js version compatibility
-2. Clear node_modules: `cd frontend && rm -rf node_modules && npm install`
-3. Check TypeScript errors: `cd frontend && npm run check`
+2. Clear node_modules and reinstall: `cd frontend && rm -rf node_modules yarn.lock && yarn install`
+3. Check TypeScript errors: `cd frontend && yarn run check`
+4. For persistent dependency issues, try: `cd frontend && yarn install --frozen-lockfile`
 
 **Database connection issues**:
 1. Verify PostgreSQL is running: `make logs`

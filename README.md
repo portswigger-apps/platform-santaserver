@@ -19,10 +19,16 @@ SantaServer provides all of the APIs for Google's Santa Client and a slick intui
 
 ## Architecture
 
-- **Backend**: Python 3.11 with FastAPI framework, PostgreSQL 17+ database
-- **Frontend**: TypeScript with Svelte framework
+### Unified Container Design
+SantaServer uses a modern unified container architecture for simplified deployment:
+
+- **Single Container**: nginx + FastAPI + static assets in one unified container
+- **Backend**: Python 3.13 with FastAPI framework, Unix socket communication
+- **Frontend**: TypeScript with SvelteKit (static build)
+- **Database**: PostgreSQL 17+ (separate container)
 - **Authentication**: Microsoft Entra (Azure AD)
-- **Deployment**: Docker containers with Nginx reverse proxy
+- **Process Management**: Supervisor managing nginx and uvicorn
+- **Security**: Non-root execution, minimal attack surface
 
 ## Quick Start
 
@@ -53,18 +59,19 @@ SantaServer provides all of the APIs for Google's Santa Client and a slick intui
    ```
 
 5. Access the application:
-   - Frontend: http://localhost
-   - Backend API: http://localhost/api
-   - Direct backend: http://localhost:8000
-   - Direct frontend: http://localhost:3000
+   - Web Interface: http://localhost:8080
+   - API Endpoints: http://localhost:8080/api
+   - Health Check: http://localhost:8080/health
 
 ### Development Commands
 
 ```bash
 make help           # Show all available commands
+make validate       # Build with full validation testing
 make up             # Start development environment
 make down           # Stop development environment
-make logs           # View logs from all services
+make logs           # View logs from unified container
+make shell          # Access unified container shell
 make test           # Run backend tests
 make lint           # Run linting for both backend and frontend
 make format         # Format code for both backend and frontend
@@ -104,10 +111,10 @@ The backend follows Test-Driven Development (TDD) principles:
 
 ### Frontend Development
 
-- Install dependencies: `cd frontend && npm install`
+- Install dependencies: `cd frontend && yarn install`
 - Format code: `make format-frontend`
 - Lint code: `make lint-frontend`
-- Type checking: `cd frontend && npm run check`
+- Type checking: `cd frontend && yarn run check`
 
 ## Production Deployment
 

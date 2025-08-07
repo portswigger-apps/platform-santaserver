@@ -8,36 +8,51 @@ SantaServer is a management server for Google's Santa (macOS security agent), pr
 
 ## Architecture & Tech Stack
 
+**Unified Container Architecture:**
+- Single container with nginx + FastAPI + static frontend assets
+- Unix socket communication between nginx and uvicorn (`/tmp/sockets/uvicorn.sock`)
+- Supervisor process management for nginx and uvicorn
+- Non-root execution as nginx user (UID 101) for security
+
 **Backend:**
-- Python 3 with FastAPI framework
+- Python 3.13+ with FastAPI framework
+- uv for dependency and virtual environment management
 - WebSocket support for real-time features
 - FastAPI-Azure-Auth for authentication
 - SQLModel ORM with PostgreSQL 17+ database
 - Microsoft Entra for authentication
 
 **Frontend:**
-- TypeScript with Svelte framework
-- Served through Nginx reverse proxy
+- TypeScript with SvelteKit framework (static adapter)
+- Yarn package manager (chosen over npm for better dependency resolution)
+- Static assets served by nginx
 - Backend API exposed at `/api` endpoint
 
 **Development Environment:**
-- Docker/OCI containers for packaging
-- Docker Compose for local development
-- Nginx as reverse proxy
+- Unified Docker container for simplified deployment
+- Docker Compose with PostgreSQL database container
+- Single port exposure (8080) for all services
 
 ## Development Commands
 
 **Backend Testing:**
-- `pytest` - Run unit tests using FastAPI TestClient and httpx
-- `tox` - Run tests across environments
+- `uv run pytest` - Run unit tests using FastAPI TestClient and httpx
+- `uv run tox` - Run tests across environments
 - Test-driven development approach is followed
 
 **Backend Code Quality:**
-- `black` - Code formatting (120 character line length)
-- `flake8` - Linting (configured for 120 character line length)
+- `uv run black` - Code formatting (120 character line length)
+- `uv run flake8` - Linting (configured for 120 character line length)
+
+**Frontend Package Management:**
+- `yarn install` - Install dependencies (use yarn, not npm)
+- `yarn add package-name` - Add new dependency
+- `yarn add -D package-name` - Add development dependency
 
 **Frontend Code Quality:**
-- `typescript-eslint` - TypeScript linting
+- `yarn run lint` - ESLint + TypeScript linting
+- `yarn run format` - Prettier formatting
+- `yarn run check` - TypeScript type checking
 
 ## Key Development Notes
 
