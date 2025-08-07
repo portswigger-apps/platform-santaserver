@@ -1,22 +1,25 @@
 # PRD 004 - Frontend Authentication Components (MVP)
 
-**Document Version:** 2.0  
+**Document Version:** 2.1  
 **Created:** 2025-08-07  
+**Updated:** 2025-08-07  
 **Status:** Draft  
 **Related:** PRD 003 - Authentication and RBAC System
 
 ## Executive Summary
 
-This PRD defines the essential frontend authentication components for SantaServer's MVP, focusing on local user authentication, basic user management, and role-based navigation using SvelteKit. Designed with extensible architecture to support future SSO and SCIM user types with visible indicators in the admin UI.
+This PRD defines the essential frontend authentication components for SantaServer's MVP, focusing on local user authentication, basic user management, and role-based navigation using SvelteKit. Designed with extensible architecture to support future SSO and SCIM user types with visible indicators in the admin UI. Includes comprehensive security hardening and performance optimizations.
 
 ## Frontend Architecture
 
 ### Technology Stack
 - **Framework**: SvelteKit with static adapter
 - **Language**: TypeScript
-- **State Management**: Svelte stores
-- **API Client**: Fetch with authentication wrapper
+- **State Management**: Svelte stores with performance optimizations
+- **API Client**: Fetch with authentication wrapper and security headers
 - **Styling**: CSS with modern design system
+- **Security**: CSP headers, XSS protection, secure token storage
+- **Performance**: Memoized computations, lazy loading, efficient re-rendering
 
 ### Component Structure
 ```
@@ -147,6 +150,8 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  sessionExpiry: Date | null;
+  lastActivity: Date | null;
 }
 
 export const authStore = writable<AuthState>({
@@ -154,37 +159,80 @@ export const authStore = writable<AuthState>({
   accessToken: null,
   isAuthenticated: false,
   isLoading: true,
-  error: null
+  error: null,
+  sessionExpiry: null,
+  lastActivity: null
 });
 
 // Derived stores
 export const user = derived(authStore, ($auth) => $auth.user);
 export const isAuthenticated = derived(authStore, ($auth) => $auth.isAuthenticated);
 
-// Permission checker
+// Memoized permission checker for performance
+const permissionCache = new Map<string, boolean>();
+const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
+let lastCacheUpdate = 0;
+
 export const hasPermission = derived(user, ($user) => 
   (resource: string, action: string) => {
     if (!$user) return false;
     
+    const cacheKey = `${$user.id}:${resource}:${action}`;
+    const now = Date.now();
+    
+    // Check cache validity and clear if expired
+    if (now - lastCacheUpdate > CACHE_EXPIRY) {
+      permissionCache.clear();
+      lastCacheUpdate = now;
+    }
+    
+    // Return cached result if available
+    if (permissionCache.has(cacheKey)) {
+      return permissionCache.get(cacheKey)!;
+    }
+    
+    let hasAccess = false;
+    
     // Check direct role permissions
     for (const role of $user.roles) {
       if (role.permissions[resource]?.includes(action)) {
-        return true;
+        hasAccess = true;
+        break;
       }
     }
     
-    // Check group role permissions
-    for (const group of $user.groups) {
-      for (const role of group.roles) {
-        if (role.permissions[resource]?.includes(action)) {
-          return true;
+    // Check group role permissions if not found in direct roles
+    if (!hasAccess) {
+      for (const group of $user.groups) {
+        for (const role of group.roles) {
+          if (role.permissions[resource]?.includes(action)) {
+            hasAccess = true;
+            break;
+          }
         }
+        if (hasAccess) break;
       }
     }
     
-    return false;
+    // Cache the result
+    permissionCache.set(cacheKey, hasAccess);
+    return hasAccess;
   }
 );
+
+// Session monitoring
+export const isSessionExpired = derived(authStore, ($auth) => {
+  if (!$auth.sessionExpiry || !$auth.isAuthenticated) return false;
+  return new Date() > $auth.sessionExpiry;
+});
+
+// Activity tracking for session timeout
+export const trackActivity = () => {
+  authStore.update(state => ({
+    ...state,
+    lastActivity: new Date()
+  }));
+};
 ```
 
 ## Core Components
@@ -402,26 +450,74 @@ import { get } from 'svelte/store';
 
 class ApiClient {
   private baseUrl = '/api/v1';
+  private csrfToken: string | null = null;
+
+  constructor() {
+    // Initialize CSRF token
+    this.initializeCsrfToken();
+  }
+
+  private async initializeCsrfToken() {
+    try {
+      const response = await fetch('/api/v1/csrf-token');
+      const data = await response.json();
+      this.csrfToken = data.csrf_token;
+    } catch (error) {
+      console.warn('Failed to get CSRF token:', error);
+    }
+  }
 
   private getAuthHeaders(): Record<string, string> {
     const auth = get(authStore);
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest', // CSRF protection
     };
 
     if (auth.accessToken) {
       headers.Authorization = `Bearer ${auth.accessToken}`;
     }
 
+    if (this.csrfToken) {
+      headers['X-CSRF-Token'] = this.csrfToken;
+    }
+
     return headers;
   }
 
   private async handleResponse<T>(response: Response): Promise<T> {
+    // Track activity for session management
+    trackActivity();
+    
     if (!response.ok) {
-      const error = await response.json().catch(() => ({ error: { message: `HTTP ${response.status}` } }));
+      // Handle token expiration
+      if (response.status === 401) {
+        authStore.update(state => ({
+          ...state,
+          isAuthenticated: false,
+          user: null,
+          accessToken: null,
+          error: 'Session expired'
+        }));
+        // Clear secure storage
+        this.clearTokens();
+        throw new Error('Session expired');
+      }
+      
+      const error = await response.json().catch(() => ({ 
+        error: { message: `HTTP ${response.status}` } 
+      }));
       throw new Error(error.error?.message || `HTTP ${response.status}`);
     }
     return response.json();
+  }
+
+  private clearTokens() {
+    // Clear httpOnly cookies
+    document.cookie = 'refresh_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; HttpOnly; SameSite=Strict';
+    // Clear any localStorage tokens (legacy)
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('refresh_token');
   }
 
   async get<T>(endpoint: string): Promise<T> {
@@ -892,9 +988,172 @@ body {
 - Route access controlled by AuthGuard component
 
 ### Token Management
-- Access tokens stored in memory only
-- Refresh tokens stored in localStorage
-- Automatic token refresh on API calls
+- Access tokens stored in memory only (secure)
+- Refresh tokens stored in httpOnly cookies (XSS protection)
+- Automatic token refresh on API calls with rotation
+- Session timeout with activity tracking
 - Logout clears all stored authentication data
+- CSRF token protection for state-changing operations
 
-This simplified frontend architecture provides essential authentication functionality for the MVP while maintaining clean separation of concerns and extensibility for future enhancements.
+## Security Enhancements
+
+### XSS Protection
+```typescript
+// Input sanitization utility
+import DOMPurify from 'isomorphic-dompurify';
+
+export const sanitizeInput = (input: string): string => {
+  return DOMPurify.sanitize(input, { 
+    ALLOWED_TAGS: [], 
+    ALLOWED_ATTR: [] 
+  });
+};
+
+// Secure HTML rendering
+export const renderSafeHTML = (html: string): string => {
+  return DOMPurify.sanitize(html, {
+    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p', 'br'],
+    ALLOWED_ATTR: []
+  });
+};
+```
+
+### Content Security Policy
+```typescript
+// CSP configuration for production
+export const cspConfig = {
+  'default-src': ["'self'"],
+  'script-src': ["'self'", "'unsafe-inline'"], // Minimize unsafe-inline
+  'style-src': ["'self'", "'unsafe-inline'"],
+  'img-src': ["'self'", "data:", "https:"],
+  'connect-src': ["'self'"],
+  'font-src': ["'self'"],
+  'object-src': ["'none'"],
+  'media-src': ["'self'"],
+  'frame-src': ["'none'"]
+};
+```
+
+### Session Security
+```typescript
+// Enhanced session management
+export const sessionManager = {
+  SESSION_TIMEOUT: 30 * 60 * 1000, // 30 minutes
+  ABSOLUTE_TIMEOUT: 8 * 60 * 60 * 1000, // 8 hours
+  
+  checkSessionValidity(): boolean {
+    const auth = get(authStore);
+    if (!auth.isAuthenticated || !auth.lastActivity) return false;
+    
+    const now = new Date();
+    const timeSinceActivity = now.getTime() - auth.lastActivity.getTime();
+    
+    return timeSinceActivity < this.SESSION_TIMEOUT;
+  },
+  
+  extendSession(): void {
+    if (this.checkSessionValidity()) {
+      trackActivity();
+    } else {
+      this.endSession();
+    }
+  },
+  
+  endSession(): void {
+    authStore.update(state => ({
+      ...state,
+      isAuthenticated: false,
+      user: null,
+      accessToken: null,
+      sessionExpiry: null,
+      error: 'Session expired due to inactivity'
+    }));
+  }
+};
+```
+
+## Performance Optimizations
+
+### Component Lazy Loading
+```typescript
+// Lazy load admin components
+export const LazyUserList = lazy(() => import('./admin/UserList.svelte'));
+export const LazyGroupManagement = lazy(() => import('./admin/GroupManagement.svelte'));
+export const LazyRoleManagement = lazy(() => import('./admin/RoleManagement.svelte'));
+```
+
+### Efficient State Updates
+```typescript
+// Optimized user list with virtual scrolling
+export class VirtualizedUserList {
+  private itemHeight = 60;
+  private containerHeight = 400;
+  private visibleCount = Math.ceil(this.containerHeight / this.itemHeight);
+  
+  getVisibleItems(users: User[], scrollTop: number): User[] {
+    const startIndex = Math.floor(scrollTop / this.itemHeight);
+    const endIndex = Math.min(startIndex + this.visibleCount, users.length);
+    return users.slice(startIndex, endIndex);
+  }
+}
+```
+
+### Input Validation Framework
+```typescript
+// Comprehensive input validation
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+  username: z.string()
+    .min(3, 'Username must be at least 3 characters')
+    .max(50, 'Username must be less than 50 characters')
+    .regex(/^[a-zA-Z0-9._-]+$/, 'Username contains invalid characters'),
+  password: z.string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/, 
+           'Password must contain uppercase, lowercase, number, and special character')
+});
+
+export const validateInput = <T>(schema: z.ZodSchema<T>, data: unknown): T => {
+  const result = schema.safeParse(data);
+  if (!result.success) {
+    throw new Error(result.error.issues[0].message);
+  }
+  return result.data;
+};
+```
+
+## Testing & Quality Assurance
+
+### Frontend Testing Strategy
+- `yarn run test:unit` - Jest unit tests for components and utilities
+- `yarn run test:e2e` - Playwright end-to-end authentication flows
+- `yarn run test:security` - Security vulnerability scanning
+- `yarn run lint` - ESLint + TypeScript linting with security rules
+- `yarn run format` - Prettier code formatting
+- `yarn run check` - TypeScript type checking
+
+### Security Testing
+```typescript
+// Security test examples
+describe('Authentication Security', () => {
+  test('prevents XSS in user input', () => {
+    const maliciousInput = '<script>alert("xss")</script>';
+    const sanitized = sanitizeInput(maliciousInput);
+    expect(sanitized).not.toContain('<script>');
+  });
+  
+  test('validates session expiry', () => {
+    const expiredSession = { sessionExpiry: new Date(Date.now() - 1000) };
+    expect(isSessionExpired.get()).toBe(true);
+  });
+  
+  test('clears tokens on logout', async () => {
+    await authActions.logout();
+    expect(localStorage.getItem('refresh_token')).toBeNull();
+    expect(document.cookie).not.toContain('refresh_token');
+  });
+});
+```
+
+This enhanced frontend architecture provides robust security, performance optimizations, and comprehensive input validation while maintaining clean separation of concerns and extensibility for future enhancements.
