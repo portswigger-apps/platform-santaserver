@@ -18,7 +18,7 @@
 			<a href="/admin">Admin</a>
 		</nav>
 	</header>
-	
+
 	<slot />
 </main>
 

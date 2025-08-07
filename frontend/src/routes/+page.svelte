@@ -27,18 +27,18 @@
 			{healthStatus}
 		</p>
 	</div>
-	
+
 	<div class="grid">
 		<div class="card">
 			<h3>Pending Approvals</h3>
 			<p class="number">0</p>
 		</div>
-		
+
 		<div class="card">
 			<h3>Active Rules</h3>
 			<p class="number">0</p>
 		</div>
-		
+
 		<div class="card">
 			<h3>Connected Agents</h3>
 			<p class="number">0</p>

@@ -6,11 +6,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.api_v1.api import api_router
 from app.core.config import settings
+from app import __version__
 
 app = FastAPI(
     title="SantaServer",
     description="Enterprise Santa macOS security agent management server",
-    version="0.1.0",
+    version=__version__,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     redirect_slashes=False,
 )
@@ -18,13 +19,14 @@ app = FastAPI(
 # Set CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_origins=settings.get_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
+
 
 # Add health check endpoint for container monitoring
 @app.get("/health")
@@ -33,13 +35,14 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "santaserver-backend",
-        "version": "0.1.0"
+        "version": __version__,
     }
+
 
 # Support for Unix socket binding when running in unified container
 if __name__ == "__main__":
     import uvicorn
-    
+
     # Check if we should use Unix socket (unified container mode)
     socket_path = os.getenv("UVICORN_UDS")
     if socket_path:

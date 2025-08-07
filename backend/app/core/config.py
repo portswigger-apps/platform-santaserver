@@ -1,5 +1,6 @@
 """Application configuration settings."""
 
+import json
 from typing import Any, List, Optional
 
 from pydantic import PostgresDsn, field_validator
@@ -47,8 +48,6 @@ class Settings(BaseSettings):
         cors_str = self.BACKEND_CORS_ORIGINS
         if cors_str.startswith("[") and cors_str.endswith("]"):
             # Handle JSON-like format
-            import json
-
             return json.loads(cors_str)
         else:
             # Handle comma-separated values
