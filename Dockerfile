@@ -59,13 +59,18 @@ RUN apt-get update && apt-get install -y \
 RUN groupadd -g 101 nginx && \
     useradd -g nginx -u 101 -r -s /bin/false nginx
 
-# Configure nginx to run as non-root
-RUN sed -i '/user /c\user nginx;' /etc/nginx/nginx.conf && \
-    sed -i 's|pid /run/nginx.pid;|pid /tmp/nginx.pid;|' /etc/nginx/nginx.conf && \
-    mkdir -p /var/cache/nginx /var/lib/nginx/body /var/lib/nginx/fastcgi && \
-    mkdir -p /var/lib/nginx/proxy /var/lib/nginx/scgi /var/lib/nginx/uwsgi && \
-    chown -R nginx:nginx /var/cache/nginx /var/log/nginx /var/lib/nginx && \
-    rm -f /etc/nginx/sites-enabled/default
+# Remove default nginx configuration
+RUN rm -f /etc/nginx/sites-enabled/default
+
+# Create nginx runtime directories in /tmp for read-only filesystem
+RUN mkdir -p /tmp/nginx/client_body_temp \
+             /tmp/nginx/proxy_temp \
+             /tmp/nginx/fastcgi_temp \
+             /tmp/nginx/uwsgi_temp \
+             /tmp/nginx/scgi_temp \
+             /tmp/nginx/cache && \
+    chown -R nginx:nginx /tmp/nginx && \
+    chmod -R 755 /tmp/nginx
 
 # Create application directory and set up proper permissions
 RUN mkdir -p /app /var/log/supervisor /tmp/sockets /tmp/uv-cache && \
@@ -81,7 +86,7 @@ COPY --from=backend-build --chown=nginx:nginx /app/.venv /app/.venv
 
 # Copy configuration files
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY config/nginx-unified.conf /etc/nginx/conf.d/default.conf
+COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/entrypoint.sh /entrypoint.sh
 COPY config/supervisor-watchdog.py /usr/local/bin/supervisor-watchdog
 
@@ -90,10 +95,11 @@ RUN chown -R nginx:nginx /app /var/www/html && \
     chmod +x /entrypoint.sh && \
     chmod +x /usr/local/bin/supervisor-watchdog && \
     chmod 644 /etc/supervisor/conf.d/supervisord.conf && \
-    chmod 644 /etc/nginx/conf.d/default.conf
+    chmod 644 /etc/nginx/nginx.conf
 
-# Remove default nginx configuration
-RUN rm -f /etc/nginx/conf.d/default.conf.bak
+
+# Add tmpfs mount for writable areas in read-only filesystem
+VOLUME ["/tmp"]
 
 # Set working directory
 WORKDIR /app

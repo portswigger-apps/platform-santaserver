@@ -23,6 +23,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    read_only: true
+    tmpfs:
+      - /tmp:size=100m,mode=1777
     environment:
       # Database connection
       - POSTGRES_SERVER=db

@@ -2,7 +2,15 @@
 # Entrypoint script for SantaServer unified container
 set -e
 
-echo "🚀 Starting SantaServer unified container..."
+# JSON logging function
+log_json() {
+    local level="$1"
+    local message="$2"
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    printf '{"timestamp":"%s","level":"%s","message":"%s","service":"santaserver-entrypoint"}\n' "$timestamp" "$level" "$message"
+}
+
+log_json "info" "Starting SantaServer unified container"
 
 # Set default environment variables
 export UVICORN_UDS=${UVICORN_UDS:-/tmp/sockets/uvicorn.sock}
@@ -14,9 +22,19 @@ mkdir -p /tmp/sockets
 chmod 755 /tmp/sockets
 chown nginx:nginx /tmp/sockets
 
-# Ensure log directories exist
-mkdir -p /tmp/logs /var/log/supervisor
-chown nginx:nginx /tmp/logs /var/log/supervisor
+# Ensure nginx runtime directories exist (read-only filesystem support)
+mkdir -p /tmp/nginx/client_body_temp
+mkdir -p /tmp/nginx/proxy_temp  
+mkdir -p /tmp/nginx/fastcgi_temp
+mkdir -p /tmp/nginx/uwsgi_temp
+mkdir -p /tmp/nginx/scgi_temp
+mkdir -p /tmp/nginx/cache
+
+# Create supervisor PID directory and set proper permissions
+mkdir -p /tmp/supervisor
+chown -R nginx:nginx /tmp/nginx /tmp/supervisor
+chmod -R 755 /tmp/nginx /tmp/supervisor
+
 
 # Clean up any existing socket files
 rm -f /tmp/sockets/uvicorn.sock /tmp/supervisor.sock
@@ -27,23 +45,23 @@ export PYTHONPATH="/app:$PYTHONPATH"
 
 # Validate that required directories and files exist
 if [ ! -d "/var/www/html" ]; then
-    echo "❌ Frontend build directory not found at /var/www/html"
+    log_json "error" "Frontend build directory not found at /var/www/html" >&2
     exit 1
 fi
 
 if [ ! -f "/app/app/main.py" ]; then
-    echo "❌ FastAPI application not found at /app/app/main.py"
+    log_json "error" "FastAPI application not found at /app/app/main.py" >&2
     exit 1
 fi
 
 if [ ! -f "/app/.venv/bin/uvicorn" ]; then
-    echo "❌ Uvicorn not found in virtual environment"
+    log_json "error" "Uvicorn not found in virtual environment" >&2
     exit 1
 fi
 
 # Test database connectivity if configured
 if [ ! -z "$POSTGRES_SERVER" ]; then
-    echo "🔍 Checking database connectivity..."
+    log_json "info" "Checking database connectivity"
     # Note: This is optional and will not fail the startup
     python3 -c "
 import os
@@ -53,17 +71,12 @@ try:
     print('Database configuration found')
 except Exception as e:
     print(f'Database connection warning: {e}')
-" || echo "⚠️ Database connection check failed (continuing anyway)"
+" || log_json "warn" "Database connection check failed (continuing anyway)"
 fi
 
-echo "✅ Environment setup complete"
-echo "📊 Configuration summary:"
-echo "   - Frontend assets: /var/www/html"
-echo "   - Backend app: /app"
-echo "   - Unix socket: $UVICORN_UDS"
-echo "   - Running as user: $NGINX_USER"
-
-echo "🔧 Starting services via supervisor..."
+log_json "info" "Environment setup complete"
+log_json "info" "Configuration - Frontend assets: /var/www/html, Backend app: /app, Unix socket: $UVICORN_UDS, Running as user: $NGINX_USER"
+log_json "info" "Starting services via supervisor"
 
 # Execute the main command (supervisor)
 exec "$@"
