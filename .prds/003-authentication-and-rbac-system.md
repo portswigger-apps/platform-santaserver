@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-This PRD defines the MVP authentication and RBAC system for SantaServer, focusing on local user authentication with users, groups, and roles functionality. Designed for immediate implementation with a clear path to future enhancements.
+This PRD defines the MVP authentication and RBAC system for SantaServer, focusing on local user authentication with users, groups, and roles functionality. Designed with extensible architecture to support future SSO sign-in and SCIM provisioning while maintaining MVP simplicity.
 
 ## MVP Objectives
 
@@ -14,7 +14,8 @@ This PRD defines the MVP authentication and RBAC system for SantaServer, focusin
 - Local user authentication with bcrypt password hashing
 - User, Group, and Role management with many-to-many relationships
 - JWT-based session management
-- Basic admin interface for user/group/role management
+- Extensible user type system (local, SSO, SCIM) with provider configuration
+- Admin interface with user type visibility and management
 - Database schema management with Alembic migrations
 - Environment-based initial admin user creation
 
@@ -30,16 +31,79 @@ This PRD defines the MVP authentication and RBAC system for SantaServer, focusin
 ### Core Tables
 
 ```sql
--- Users table
+-- User authentication types enum for extensibility
+CREATE TYPE user_type AS ENUM ('local', 'sso', 'scim');
+CREATE TYPE provider_type AS ENUM ('saml2', 'oidc', 'scim_v2');
+
+-- Enhanced Users table with extensibility for future SSO/SCIM support
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL, -- bcrypt hash
+    
+    -- Authentication type and credentials
+    user_type user_type DEFAULT 'local' NOT NULL,
+    password_hash VARCHAR(255), -- nullable for SSO/SCIM users
+    
+    -- External identity integration (for future SSO/SCIM)
+    external_id VARCHAR(255), -- Provider-specific user ID
+    provider_name VARCHAR(100), -- Reference to auth_providers.name
+    
+    -- Enhanced profile data (SCIM-compatible)
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    display_name VARCHAR(200),
+    department VARCHAR(100),
+    title VARCHAR(100),
+    phone VARCHAR(50),
+    
+    -- Status and lifecycle management
     is_active BOOLEAN DEFAULT true,
+    is_provisioned BOOLEAN DEFAULT false, -- SCIM provisioning status
     last_login TIMESTAMP,
+    last_sync TIMESTAMP, -- Last SCIM sync timestamp
+    
+    -- Audit fields
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by UUID REFERENCES users(id),
+    updated_by UUID REFERENCES users(id),
+    
+    -- Data integrity constraints
+    CONSTRAINT chk_password_required_local CHECK (
+        (user_type = 'local' AND password_hash IS NOT NULL) OR 
+        (user_type IN ('sso', 'scim'))
+    ),
+    CONSTRAINT chk_external_id_for_external_users CHECK (
+        (user_type = 'local' AND external_id IS NULL) OR
+        (user_type IN ('sso', 'scim') AND external_id IS NOT NULL)
+    ),
+    CONSTRAINT chk_provider_for_external_users CHECK (
+        (user_type = 'local' AND provider_name IS NULL) OR
+        (user_type IN ('sso', 'scim') AND provider_name IS NOT NULL)
+    )
+);
+
+-- Authentication providers for future SSO/SCIM integration
+CREATE TABLE auth_providers (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(100) UNIQUE NOT NULL, -- e.g., 'azure_ad', 'okta', 'google'
+    display_name VARCHAR(200) NOT NULL,
+    provider_type provider_type NOT NULL,
+    is_enabled BOOLEAN DEFAULT false,
+    
+    -- Provider-specific configuration (encrypted)
+    configuration JSONB DEFAULT '{}', -- certificates, endpoints, client IDs
+    
+    -- SCIM-specific settings
+    scim_base_url VARCHAR(500),
+    scim_bearer_token_hash VARCHAR(255), -- encrypted SCIM bearer token
+    
+    -- Audit fields
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by UUID REFERENCES users(id),
+    updated_by UUID REFERENCES users(id)
 );
 
 -- Roles table
@@ -54,14 +118,30 @@ CREATE TABLE roles (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Groups table
+-- Enhanced Groups table with external source support
 CREATE TABLE groups (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(50) UNIQUE NOT NULL,
     display_name VARCHAR(100) NOT NULL,
     description TEXT,
+    
+    -- External source support for SCIM/SSO groups
+    source_type VARCHAR(50) DEFAULT 'local',
+    external_id VARCHAR(255),
+    provider_name VARCHAR(100) REFERENCES auth_providers(name),
+    last_sync TIMESTAMP,
+    
+    -- Audit fields
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_by UUID REFERENCES users(id),
+    updated_by UUID REFERENCES users(id),
+    
+    -- Constraint for external groups
+    CONSTRAINT chk_external_group_fields CHECK (
+        (source_type = 'local' AND external_id IS NULL AND provider_name IS NULL) OR
+        (source_type IN ('scim', 'sso') AND external_id IS NOT NULL AND provider_name IS NOT NULL)
+    )
 );
 
 -- User-Role relationships (many-to-many)
@@ -120,6 +200,14 @@ CREATE TABLE user_sessions (
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_username ON users(username);
 CREATE INDEX idx_users_active ON users(is_active) WHERE is_active = true;
+CREATE INDEX idx_users_user_type ON users(user_type);
+CREATE INDEX idx_users_external_id ON users(external_id) WHERE external_id IS NOT NULL;
+CREATE INDEX idx_users_provider_name ON users(provider_name) WHERE provider_name IS NOT NULL;
+
+-- Groups indexes
+CREATE INDEX idx_groups_source_type ON groups(source_type);
+CREATE INDEX idx_groups_external_id ON groups(external_id) WHERE external_id IS NOT NULL;
+CREATE INDEX idx_groups_provider_name ON groups(provider_name) WHERE provider_name IS NOT NULL;
 
 -- Sessions indexes
 CREATE INDEX idx_user_sessions_user_id ON user_sessions(user_id);
@@ -130,6 +218,10 @@ CREATE INDEX idx_user_sessions_expires_at ON user_sessions(expires_at);
 CREATE INDEX idx_user_roles_user_id ON user_roles(user_id);
 CREATE INDEX idx_user_groups_user_id ON user_groups(user_id);
 CREATE INDEX idx_group_roles_group_id ON group_roles(group_id);
+
+-- Auth providers indexes
+CREATE INDEX idx_auth_providers_name ON auth_providers(name);
+CREATE INDEX idx_auth_providers_enabled ON auth_providers(is_enabled) WHERE is_enabled = true;
 ```
 
 ## Alembic Migration Strategy
