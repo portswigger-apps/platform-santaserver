@@ -2,19 +2,19 @@
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlmodel import Session
 
 from app.core.database import get_db
 from app.core.deps import get_current_active_user, get_current_user_optional
 from app.models.auth import User
 from app.schemas.auth import (
+    ChangePasswordRequest,
     LoginRequest,
     LoginResponse,
+    MessageResponse,
     RefreshRequest,
     TokenResponse,
-    ChangePasswordRequest,
-    MessageResponse,
     UserProfile,
 )
 from app.services.auth_service import AuthenticationService

@@ -1,16 +1,17 @@
 """Test configuration and fixtures."""
 
 import os
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlmodel import Session, create_engine
 from testcontainers.postgres import PostgresContainer
 
-from app.main import app
-from app.core.database import get_db
-from app.models.auth import User, Role, UserRole
-from app.core.security import SecurityUtils
 from app.core.config import Settings
+from app.core.database import get_db
+from app.core.security import SecurityUtils
+from app.main import app
+from app.models.auth import Role, User, UserRole
 
 
 @pytest.fixture(scope="session")

@@ -35,7 +35,7 @@ test: ## Run backend tests
 	cd backend && uv run pytest
 
 test-watch: ## Run backend tests with file watching
-	cd backend && uv run pytest -f
+	cd backend && uv run pytest --looponfail
 
 lint: ## Run linting for both backend and frontend
 	cd backend && uv run flake8 app/ tests/
@@ -57,9 +57,18 @@ format-backend: ## Format backend code
 format-frontend: ## Format frontend code
 	cd frontend && yarn run format
 
-type-check: ## Run type checking
+type-check: ## Run type checking for both backend and frontend
 	cd backend && uv run mypy app/
 	cd frontend && yarn run check
+
+type-check-backend: ## Run backend type checking
+	cd backend && uv run mypy app/
+
+type-check-frontend: ## Run frontend type checking
+	cd frontend && yarn run check
+
+test-cov: ## Run backend tests with coverage reporting
+	cd backend && uv run pytest --cov=app --cov-report=html
 
 # Setup commands
 setup: ## Initial setup - copy env files and install dependencies

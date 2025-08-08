@@ -3,14 +3,14 @@
 from typing import List
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, status, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlmodel import Session, select
 
 from app.core.database import get_db
-from app.core.deps import require_admin, get_current_active_user
+from app.core.deps import get_current_active_user, require_admin
 from app.core.security import SecurityUtils
 from app.models.auth import User, UserTypeEnum
-from app.schemas.auth import CreateUserRequest, UpdateUserRequest, UserResponse, MessageResponse
+from app.schemas.auth import CreateUserRequest, MessageResponse, UpdateUserRequest, UserResponse
 from app.services.auth_service import AuthenticationService
 
 router = APIRouter()

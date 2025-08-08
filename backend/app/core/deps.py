@@ -1,15 +1,15 @@
 """FastAPI dependencies for authentication and authorization."""
 
-from typing import Optional, Dict, List
+from typing import Dict, List, Optional
 from uuid import UUID
 
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlmodel import Session, select
 
 from app.core.database import get_db
 from app.core.security import JWTManager
-from app.models.auth import User, UserSession, Role, UserRole, UserGroup, GroupRole
+from app.models.auth import GroupRole, Role, User, UserGroup, UserRole, UserSession
 
 # Bearer token security scheme
 security = HTTPBearer(auto_error=False)

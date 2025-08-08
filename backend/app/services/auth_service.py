@@ -1,14 +1,14 @@
 """Authentication service for user login, session management, and security audit."""
 
-from datetime import datetime, timezone, timedelta
-from typing import Optional, Dict, Any, Tuple
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, Optional, Tuple
 from uuid import UUID
 
 from sqlmodel import Session, select
 
 from app.core.config import settings
-from app.core.security import SecurityUtils, create_token_pair, TokenPair, JWTManager
-from app.models.auth import User, UserSession, SecurityAuditLog, UserTypeEnum
+from app.core.security import JWTManager, SecurityUtils, TokenPair, create_token_pair
+from app.models.auth import SecurityAuditLog, User, UserSession, UserTypeEnum
 
 
 class AuthenticationService:

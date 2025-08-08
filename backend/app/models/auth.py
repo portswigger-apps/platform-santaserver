@@ -2,13 +2,14 @@
 
 import enum
 from datetime import datetime, timezone
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 from uuid import UUID, uuid4
+
 from sqlalchemy import (
     JSON,
     Column,
 )
-from sqlmodel import SQLModel, Field
+from sqlmodel import Field, SQLModel
 
 
 def utc_now() -> datetime:
