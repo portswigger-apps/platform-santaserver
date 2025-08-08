@@ -1,7 +1,7 @@
 // src/lib/auth/api.ts - CONFIRMED BACKEND ENDPOINTS
-import type { LoginRequest, LoginResponse, User, RefreshRequest, TokenResponse, ChangePasswordRequest } from './types';
+import type { LoginRequest, LoginResponse, User, TokenResponse, ChangePasswordRequest } from './types';
 import { apiClient } from '$lib/utils/api';
-import { authStore, trackActivity } from './stores';
+import { authStore } from './stores';
 import { goto } from '$app/navigation';
 
 // All endpoints confirmed in app/api/api_v1/endpoints/auth.py
@@ -128,7 +128,7 @@ export const authActions = {
 				isLoading: false,
 				lastActivity: new Date()
 			}));
-		} catch (error) {
+		} catch {
 			// No valid session, user needs to login
 			authStore.update((state) => ({
 				...state,
@@ -159,7 +159,7 @@ export const authActions = {
 			}));
 
 			return true;
-		} catch (error) {
+		} catch {
 			// Refresh failed, clear session
 			localStorage.removeItem('refresh_token');
 			authStore.update((state) => ({
