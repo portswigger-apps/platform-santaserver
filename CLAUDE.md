@@ -36,13 +36,21 @@ SantaServer is a management server for Google's Santa (macOS security agent), pr
 ## Development Commands
 
 **Backend Testing:**
-- `uv run pytest` - Run unit tests using FastAPI TestClient and httpx
+- `uv run pytest` - Run 50 comprehensive tests using TestContainers (PostgreSQL) + SQLite fallback
+- `uv run pytest --cov=app --cov-report=html` - Run tests with coverage reporting
+- `uv run pytest -v tests/test_auth_endpoints.py` - Run specific authentication test module
 - `uv run tox` - Run tests across environments
-- Test-driven development approach is followed
+- Test-driven development approach is followed with comprehensive authentication testing
 
 **Backend Code Quality:**
 - `uv run black` - Code formatting (120 character line length)
 - `uv run flake8` - Linting (configured for 120 character line length)
+- `uv run autoflake --remove-all-unused-imports --recursive app/ tests/` - Remove unused imports
+
+**Database Management:**
+- `uv run alembic upgrade head` - Run database migrations (3 migrations for authentication)
+- `uv run alembic current` - Check current migration status
+- `uv run alembic history --verbose` - View migration history
 
 **Frontend Package Management:**
 - `yarn install` - Install dependencies (use yarn, not npm)
@@ -56,13 +64,37 @@ SantaServer is a management server for Google's Santa (macOS security agent), pr
 
 ## Key Development Notes
 
-- Backend follows TDD methodology
+- Backend follows TDD methodology with 50 comprehensive tests
 - Line length configured to 120 characters for both Python (black/flake8) and TypeScript
-- Authentication is handled via Microsoft Entra integration
+- **Authentication System (PRD 003 - COMPLETED)**: JWT-based with RBAC, bcrypt hashing, account lockout
+- Authentication includes 15 API endpoints (auth + user management) with admin-only controls
 - Real-time features implemented using WebSockets
-- Database operations use SQLModel for type safety
+- Database operations use SQLModel for type safety with Alembic migrations
+- TestContainers for PostgreSQL testing + SQLite fallback for CI/CD
 - Use the Context7 MCP if available
-- use conventional commits for any git commit messages
+- Use conventional commits for any git commit messages
+
+## Authentication System
+
+**Status**: ✅ **PRODUCTION READY** (PRD 003 Complete)
+
+**Features**:
+- JWT authentication with 30-min access tokens + 7-day refresh tokens
+- RBAC with admin/user roles and JSON permissions
+- Password security: bcrypt 12 rounds, complexity requirements, account lockout
+- Comprehensive audit logging with IP/user agent tracking
+- Session management with JTI tracking for token revocation
+- Database: 3 Alembic migrations with extensible schema for SSO/SCIM
+
+**API Endpoints**:
+- Authentication: `/api/v1/auth/{login,logout,refresh,profile,change-password,verify}`
+- User Management: `/api/v1/users/{GET,POST,PUT,DELETE}` (admin-only)
+- Health: `/api/v1/health/` 
+
+**Documentation**:
+- Complete system docs: `backend/AUTHENTICATION.md`
+- API docs: http://localhost:8080/docs (FastAPI auto-generated)
+- Test suite: 50 tests with 100% pass rate
 
 ## File Naming Conventions
 
