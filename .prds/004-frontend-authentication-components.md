@@ -1,14 +1,14 @@
 # PRD 004 - Frontend Authentication Components (MVP)
 
-**Document Version:** 2.1  
+**Document Version:** 2.2  
 **Created:** 2025-08-07  
-**Updated:** 2025-08-07  
-**Status:** Draft  
-**Related:** PRD 003 - Authentication and RBAC System
+**Updated:** 2025-08-08  
+**Status:** Ready for Implementation  
+**Related:** PRD 003 - Authentication and RBAC System (COMPLETED)
 
 ## Executive Summary
 
-This PRD defines the essential frontend authentication components for SantaServer's MVP, focusing on local user authentication, basic user management, and role-based navigation using SvelteKit. Designed with extensible architecture to support future SSO and SCIM user types with visible indicators in the admin UI. Includes comprehensive security hardening and performance optimizations.
+This PRD defines the essential frontend authentication components for SantaServer's MVP, providing concrete implementation guidance based on the completed backend authentication system (PRD 003). All backend APIs are implemented and tested - this document specifies exact API contracts, authentication flows, and security patterns for the frontend engineer to implement the login UI and user management interface.
 
 ## Frontend Architecture
 
@@ -58,27 +58,28 @@ src/
 ### Core Types
 ```typescript
 // src/lib/auth/types.ts
+// CONFIRMED: Backend Enums (app/models/auth.py)
 
-// User authentication types enum
 export enum UserType {
-  LOCAL = 'local',
-  SSO = 'sso', 
-  SCIM = 'scim'
+  LOCAL = 'local',   // UserTypeEnum.LOCAL
+  SSO = 'sso',      // UserTypeEnum.SSO (future)
+  SCIM = 'scim'     // UserTypeEnum.SCIM (future)
 }
 
 export enum ProviderType {
-  SAML2 = 'saml2',
-  OIDC = 'oidc',
-  SCIM_V2 = 'scim_v2'
+  SAML2 = 'saml2',     // ProviderTypeEnum.SAML2
+  OIDC = 'oidc',       // ProviderTypeEnum.OIDC
+  SCIM_V2 = 'scim_v2'  // ProviderTypeEnum.SCIM_V2
 }
 
+// CONFIRMED: Backend Schema (app/schemas/auth.py - UserProfile/UserResponse)
 export interface User {
-  id: string;
+  id: string;           // UUID from backend
   username: string;
   email: string;
-  user_type: UserType;
+  user_type: UserType;  // 'local', 'sso', 'scim'
   
-  // Enhanced profile (SCIM-compatible)
+  // Profile fields (from UserProfile schema)
   first_name?: string;
   last_name?: string;
   display_name?: string;
@@ -86,20 +87,15 @@ export interface User {
   title?: string;
   phone?: string;
   
-  // External identity info (admin view only)
-  external_id?: string;
-  provider_name?: string;
-  provider_display_name?: string;
-  
-  // Status
+  // Status fields (from UserResponse schema) 
   is_active: boolean;
-  is_provisioned: boolean;
+  is_provisioned: boolean;  // Only in UserResponse
   last_login?: Date;
-  last_sync?: Date;
+  created_at?: Date;        // Only in UserResponse
+  updated_at?: Date;        // Only in UserResponse
   
-  // Relationships
-  roles: Role[];
-  groups: Group[];
+  // Note: Backend doesn't include roles/groups in v1
+  // These would be fetched separately via /users/{id}/roles endpoint (future)
 }
 
 export interface Role {
@@ -132,10 +128,11 @@ export interface AuthProvider {
   updated_at: Date;
 }
 
+// CONFIRMED: Backend API Contract (app/schemas/auth.py)
 export interface LoginRequest {
-  username: string;
-  password: string;
-  remember_me?: boolean;
+  username: string;  // Backend accepts username OR email
+  password: string;  // Min 8 chars, complexity enforced backend
+  // Note: remember_me not implemented in backend v1
 }
 ```
 
@@ -246,17 +243,41 @@ export const trackActivity = () => {
 
   let credentials: LoginRequest = {
     username: '',
-    password: '',
-    remember_me: false
+    password: ''
+    // remember_me removed - not implemented in backend v1
   };
 
   let showPassword = false;
+  let validationErrors: string[] = [];
+
+  // Frontend validation before API call
+  function validateForm(): boolean {
+    validationErrors = [];
+    
+    if (!credentials.username.trim()) {
+      validationErrors.push('Username or email is required');
+    }
+    
+    if (!credentials.password) {
+      validationErrors.push('Password is required');
+    } else if (credentials.password.length < 8) {
+      validationErrors.push('Password must be at least 8 characters');
+    }
+    
+    return validationErrors.length === 0;
+  }
 
   async function handleLogin() {
+    if (!validateForm()) return;
+    
     try {
       await authActions.login(credentials);
+      // Success handled by store - redirects to dashboard
     } catch (error) {
-      // Error handled by store
+      // Backend errors:
+      // - "Incorrect username or password" (401)
+      // - "Account inactive" / "Account locked" (401)
+      // Error displayed by store
     }
   }
 </script>
@@ -296,17 +317,20 @@ export const trackActivity = () => {
       </div>
     </div>
 
-    <label class="checkbox">
-      <input
-        type="checkbox"
-        bind:checked={credentials.remember_me}
-        disabled={$isLoading}
-      />
-      Remember me
-    </label>
+    <!-- Remember me removed - not implemented in backend v1 -->
 
+    <!-- Frontend validation errors -->
+    {#if validationErrors.length > 0}
+      <div class="validation-errors" role="alert">
+        {#each validationErrors as error}
+          <p class="error">{error}</p>
+        {/each}
+      </div>
+    {/if}
+    
+    <!-- Backend authentication errors -->
     {#if $authError}
-      <div class="error" role="alert">
+      <div class="auth-error" role="alert">
         {$authError}
       </div>
     {/if}
@@ -410,33 +434,53 @@ export const trackActivity = () => {
 
 ### Authentication API Client
 ```typescript
-// src/lib/auth/api.ts
+// src/lib/auth/api.ts - CONFIRMED BACKEND ENDPOINTS
 import type { LoginRequest, User } from './types';
 import { apiClient } from '$lib/utils/api';
 
+// All endpoints confirmed in app/api/api_v1/endpoints/auth.py
 export const authApi = {
+  // POST /api/v1/auth/login - Returns LoginResponse
   async login(credentials: LoginRequest) {
     return apiClient.post('/auth/login', credentials);
   },
 
+  // POST /api/v1/auth/logout - Requires Bearer token
   async logout() {
     return apiClient.post('/auth/logout');
   },
 
+  // POST /api/v1/auth/logout-all - Revoke all sessions
+  async logoutAll() {
+    return apiClient.post('/auth/logout-all');
+  },
+
+  // POST /api/v1/auth/refresh - RefreshRequest -> TokenResponse
   async refreshToken(refreshToken: string) {
     return apiClient.post('/auth/refresh', { refresh_token: refreshToken });
   },
 
+  // GET /api/v1/auth/profile - Returns UserProfile
   async getProfile(): Promise<User> {
     return apiClient.get('/auth/profile');
   },
 
+  // PUT /api/v1/auth/profile - Update user profile (limited fields)
+  async updateProfile(data: Partial<User>) {
+    return apiClient.put('/auth/profile', data);
+  },
+
+  // POST /api/v1/auth/change-password - ChangePasswordRequest
   async changePassword(data: {
     current_password: string;
     new_password: string;
-    confirm_password: string;
   }) {
     return apiClient.post('/auth/change-password', data);
+  },
+
+  // GET /api/v1/auth/verify - Verify token validity
+  async verifyToken(): Promise<User> {
+    return apiClient.get('/auth/verify');
   }
 };
 ```
@@ -850,52 +894,108 @@ User action component that provides different actions based on user type (local 
 </div>
 ```
 
+## Security Configuration
+
+### Backend Security Settings
+```typescript
+// CONFIRMED: Backend security config (app/core/config.py)
+const SECURITY_CONFIG = {
+  // JWT Token Settings
+  JWT_ACCESS_TOKEN_EXPIRE_MINUTES: 30,    // 30 minutes
+  JWT_REFRESH_TOKEN_EXPIRE_DAYS: 7,       // 7 days
+  
+  // Account Lockout Settings
+  MAX_LOGIN_ATTEMPTS: 5,                   // Lock after 5 failed attempts  
+  LOCKOUT_DURATION_MINUTES: 15,           // 15 minute lockout
+  
+  // Password Requirements (enforced backend)
+  PASSWORD_MIN_LENGTH: 8,
+  PASSWORD_REQUIRE_UPPERCASE: true,
+  PASSWORD_REQUIRE_LOWERCASE: true,
+  PASSWORD_REQUIRE_NUMBERS: true,
+  PASSWORD_REQUIRE_SPECIAL: true
+};
+```
+
+### Authentication Flow (Confirmed)
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+    participant D as Database
+
+    U->>F: Enter credentials
+    F->>B: POST /api/v1/auth/login
+    B->>D: Verify user & password
+    B->>D: Check account lockout
+    B->>D: Create user session
+    B->>D: Log security event
+    B->>F: LoginResponse with tokens
+    F->>F: Store access token (memory)
+    F->>F: Store refresh token (httpOnly cookie)
+    F->>U: Redirect to dashboard
+```
+
 ## API Integration Updates
 
-### Enhanced Authentication API with User Types
+### User Management API Client
 ```typescript
-// src/lib/auth/api.ts
-import type { LoginRequest, User, UserType } from './types';
+// src/lib/admin/api.ts - CONFIRMED BACKEND ENDPOINTS
+import type { User, UserType } from '../auth/types';
 import { apiClient } from '$lib/utils/api';
 
-export const authApi = {
-  async login(credentials: LoginRequest) {
-    return apiClient.post('/auth/login', credentials);
+// All endpoints confirmed in app/api/api_v1/endpoints/users.py
+export const usersApi = {
+  // POST /api/v1/users/ - Create user (Admin only) - Returns UserResponse
+  async createUser(userData: {
+    username: string;
+    email: string;
+    password?: string;  // Required for local users
+    first_name?: string;
+    last_name?: string;
+    display_name?: string;
+    department?: string;
+    title?: string;
+    phone?: string;
+    user_type: string;  // 'local', 'sso', 'scim'
+  }) {
+    return apiClient.post('/users/', userData);
   },
 
-  async logout() {
-    return apiClient.post('/auth/logout');
-  },
-
-  async getProfile(): Promise<User> {
-    return apiClient.get('/auth/profile');
-  },
-
-  // Enhanced user management with type filtering
-  async getUsers(filters?: {
-    user_type?: UserType;
-    provider_name?: string;
-    is_active?: boolean;
-    skip?: number;
-    limit?: number;
+  // GET /api/v1/users/ - List users with pagination (Admin only)
+  async getUsers(params?: {
+    skip?: number;     // Default: 0
+    limit?: number;    // Default: 50, max: 100
   }): Promise<User[]> {
-    const params = new URLSearchParams();
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          params.set(key, String(value));
-        }
-      });
-    }
-    return apiClient.get(`/users?${params.toString()}`);
+    const queryParams = new URLSearchParams();
+    if (params?.skip) queryParams.set('skip', String(params.skip));
+    if (params?.limit) queryParams.set('limit', String(params.limit));
+    return apiClient.get(`/users/?${queryParams.toString()}`);
   },
 
-  async getAuthProviders() {
-    return apiClient.get('/auth/providers');
+  // GET /api/v1/users/{user_id} - Get user by ID (Admin only)
+  async getUser(userId: string): Promise<User> {
+    return apiClient.get(`/users/${userId}`);
   },
 
-  async syncScimUser(userId: string) {
-    return apiClient.post(`/users/${userId}/sync`);
+  // PUT /api/v1/users/{user_id} - Update user (Admin only)
+  async updateUser(userId: string, data: {
+    email?: string;
+    first_name?: string;
+    last_name?: string;
+    display_name?: string;
+    department?: string;
+    title?: string;
+    phone?: string;
+    is_active?: boolean;
+  }) {
+    return apiClient.put(`/users/${userId}`, data);
+  },
+
+  // DELETE /api/v1/users/{user_id} - Deactivate user (Admin only)
+  async deactivateUser(userId: string) {
+    return apiClient.delete(`/users/${userId}`);
   }
 };
 ```
@@ -972,28 +1072,84 @@ body {
 }
 ```
 
-## Implementation Notes
+## IMPLEMENTATION GUIDE
 
-### Authentication Flow
-1. User enters credentials in LoginForm
-2. authActions.login() calls API and stores tokens
-3. User data stored in authStore
-4. Navigation updates based on user permissions
-5. Route protection enforced via AuthGuard
+### PHASE 1: Core Authentication (Week 1)
+**CONFIRMED BACKEND ENDPOINTS AVAILABLE**
 
-### Permission System
-- Permissions checked through derived store
-- Supports both direct role permissions and group-inherited permissions
-- Navigation items shown/hidden based on permissions
-- Route access controlled by AuthGuard component
+#### 1.1 Login Implementation
+```bash
+# Required API endpoints (all implemented):
+POST /api/v1/auth/login      # LoginRequest -> LoginResponse
+GET  /api/v1/auth/profile    # Get current user
+POST /api/v1/auth/logout     # Logout current session
+GET  /api/v1/auth/verify     # Verify token validity
+```
 
-### Token Management
-- Access tokens stored in memory only (secure)
-- Refresh tokens stored in httpOnly cookies (XSS protection)
-- Automatic token refresh on API calls with rotation
-- Session timeout with activity tracking
-- Logout clears all stored authentication data
-- CSRF token protection for state-changing operations
+#### 1.2 Frontend Tasks
+- [ ] Implement `LoginForm.svelte` with validation
+- [ ] Create `authStore` with JWT token management
+- [ ] Build `apiClient` with Bearer token headers
+- [ ] Add `AuthGuard` component for route protection
+- [ ] Implement automatic token refresh
+
+#### 1.3 Authentication Flow (CONFIRMED)
+1. User enters credentials → Frontend validation
+2. `POST /auth/login` → Backend validates & creates session
+3. Backend returns `{ access_token, refresh_token, user }`
+4. Frontend stores tokens (memory + httpOnly cookie pattern)
+5. All subsequent API calls include `Authorization: Bearer {token}`
+6. Token refresh handled automatically in `apiClient`
+
+### PHASE 2: User Management (Week 2)
+**CONFIRMED BACKEND ENDPOINTS AVAILABLE**
+
+#### 2.1 Admin User Management
+```bash
+# Admin endpoints (all implemented, require admin role):
+GET    /api/v1/users/              # List users with pagination
+POST   /api/v1/users/              # Create user
+GET    /api/v1/users/{user_id}     # Get user details
+PUT    /api/v1/users/{user_id}     # Update user
+DELETE /api/v1/users/{user_id}     # Deactivate user
+```
+
+#### 2.2 Frontend Tasks
+- [ ] Build `UserList.svelte` with pagination
+- [ ] Create `UserTypeIndicator.svelte` for visual user types
+- [ ] Implement `CreateUserForm.svelte` with validation
+- [ ] Add role-based navigation and permissions
+- [ ] Build user editing and deactivation flows
+
+### PHASE 3: Security & Polish (Week 3)
+
+#### 3.1 Security Features
+- [ ] Implement session timeout (30 min access, 7 day refresh)
+- [ ] Add account lockout display (5 attempts = 15 min lockout)
+- [ ] Implement logout from all sessions
+- [ ] Add password change functionality
+- [ ] Input sanitization and XSS protection
+
+#### 3.2 User Experience
+- [ ] Loading states and error handling
+- [ ] Toast notifications for actions
+- [ ] Responsive design and accessibility
+- [ ] Password strength indicators
+- [ ] Remember login state between browser sessions
+
+### Backend Integration Notes
+- **No Role/Permission System**: Backend doesn't implement RBAC yet - use simple admin/user check
+- **User Types**: Only 'local' type functional - 'sso'/'scim' are placeholders
+- **Password Requirements**: 8+ chars, enforced server-side
+- **Session Management**: JWT with JTI tracking for proper revocation
+- **Error Handling**: Standard HTTP status codes with descriptive messages
+
+### Token Management Strategy (CONFIRMED)
+- **Access tokens**: Store in memory only (30 min lifetime)
+- **Refresh tokens**: httpOnly cookies (7 day lifetime) 
+- **Automatic refresh**: Implemented in `apiClient` interceptor
+- **Session timeout**: Track activity, warn before expiry
+- **Logout**: Revokes server-side session + clears client tokens
 
 ## Security Enhancements
 
@@ -1125,35 +1281,63 @@ export const validateInput = <T>(schema: z.ZodSchema<T>, data: unknown): T => {
 
 ## Testing & Quality Assurance
 
-### Frontend Testing Strategy
-- `yarn run test:unit` - Jest unit tests for components and utilities
-- `yarn run test:e2e` - Playwright end-to-end authentication flows
-- `yarn run test:security` - Security vulnerability scanning
-- `yarn run lint` - ESLint + TypeScript linting with security rules
-- `yarn run format` - Prettier code formatting
-- `yarn run check` - TypeScript type checking
+### Development Commands
 
-### Security Testing
-```typescript
-// Security test examples
-describe('Authentication Security', () => {
-  test('prevents XSS in user input', () => {
-    const maliciousInput = '<script>alert("xss")</script>';
-    const sanitized = sanitizeInput(maliciousInput);
-    expect(sanitized).not.toContain('<script>');
-  });
-  
-  test('validates session expiry', () => {
-    const expiredSession = { sessionExpiry: new Date(Date.now() - 1000) };
-    expect(isSessionExpired.get()).toBe(true);
-  });
-  
-  test('clears tokens on logout', async () => {
-    await authActions.logout();
-    expect(localStorage.getItem('refresh_token')).toBeNull();
-    expect(document.cookie).not.toContain('refresh_token');
-  });
-});
+**Frontend Development**:
+```bash
+# Package management (use yarn as specified)
+yarn install                    # Install dependencies
+yarn add package-name          # Add dependency
+yarn add -D package-name       # Add dev dependency
+
+# Code quality (configured for 120 char line length)
+yarn run lint                  # ESLint + TypeScript linting  
+yarn run format                # Prettier formatting
+yarn run check                 # TypeScript type checking
+
+# Testing
+yarn run test:unit             # Jest unit tests
+yarn run test:e2e              # Playwright E2E tests
 ```
 
-This enhanced frontend architecture provides robust security, performance optimizations, and comprehensive input validation while maintaining clean separation of concerns and extensibility for future enhancements.
+**Backend Testing** (for reference):
+```bash
+# All tests are passing (50/50)
+uv run pytest                  # Run all tests
+uv run pytest -v tests/test_auth_endpoints.py  # Specific tests
+uv run black app/ tests/       # Code formatting
+uv run flake8 app/ tests/      # Linting (120 chars)
+```
+```
+
+## TESTING CHECKLIST
+
+### Authentication Tests
+- [ ] Valid login redirects to dashboard
+- [ ] Invalid credentials show error message
+- [ ] Account lockout after 5 failed attempts
+- [ ] Locked account shows appropriate message
+- [ ] Token refresh works automatically
+- [ ] Logout clears session and redirects
+- [ ] Protected routes redirect to login
+- [ ] Session expires after 30 minutes inactivity
+
+### User Management Tests (Admin)
+- [ ] User list displays with pagination
+- [ ] Create user form validates inputs
+- [ ] User type indicators display correctly
+- [ ] Update user saves changes
+- [ ] Deactivate user removes access
+- [ ] Admin-only endpoints return 403 for regular users
+
+### Security Tests
+- [ ] XSS protection in user inputs
+- [ ] CSRF protection on state changes
+- [ ] SQL injection prevention
+- [ ] Password complexity validation
+- [ ] Session hijacking protection
+- [ ] Proper error message handling (no sensitive data)
+
+---
+
+**READY FOR IMPLEMENTATION**: All backend APIs are built, tested, and documented. Frontend engineer can begin Phase 1 immediately with confidence in the backend contracts.
