@@ -12,7 +12,7 @@ from alembic import context
 load_dotenv()
 
 # Add the app directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 # Import SQLModel to register all tables
 from app.models import *  # noqa
@@ -25,6 +25,7 @@ config = context.config
 # Set the database URL from environment if not in config
 if config.get_main_option("sqlalchemy.url") is None:
     from app.core.config import settings
+
     config.set_main_option("sqlalchemy.url", str(settings.SQLALCHEMY_DATABASE_URI))
 
 # Interpret the config file for Python logging.
@@ -80,9 +81,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

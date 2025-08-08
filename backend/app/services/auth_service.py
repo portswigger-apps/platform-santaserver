@@ -5,7 +5,6 @@ from typing import Optional, Dict, Any, Tuple
 from uuid import UUID
 
 from sqlmodel import Session, select
-from fastapi import HTTPException, status
 
 from app.core.config import settings
 from app.core.security import SecurityUtils, create_token_pair, TokenPair, JWTManager
@@ -210,7 +209,7 @@ class AuthenticationService:
 
         # Find session
         session_stmt = select(UserSession).where(
-            UserSession.refresh_token_jti == refresh_jti, UserSession.is_revoked == False
+            UserSession.refresh_token_jti == refresh_jti, UserSession.is_revoked.is_(False)
         )
         session = self.db.exec(session_stmt).first()
 
@@ -218,7 +217,7 @@ class AuthenticationService:
             return None
 
         # Get user
-        user_stmt = select(User).where(User.id == UUID(user_id), User.is_active == True)
+        user_stmt = select(User).where(User.id == UUID(user_id), User.is_active.is_(True))
         user = self.db.exec(user_stmt).first()
 
         if not user:
@@ -279,7 +278,7 @@ class AuthenticationService:
         session_stmt = select(UserSession).where(
             UserSession.user_id == user.id,
             (UserSession.token_jti == jti) | (UserSession.refresh_token_jti == jti),
-            UserSession.is_revoked == False,
+            UserSession.is_revoked.is_(False),
         )
         session = self.db.exec(session_stmt).first()
 
@@ -319,7 +318,7 @@ class AuthenticationService:
         Returns:
             Number of sessions revoked
         """
-        sessions_stmt = select(UserSession).where(UserSession.user_id == user.id, UserSession.is_revoked == False)
+        sessions_stmt = select(UserSession).where(UserSession.user_id == user.id, UserSession.is_revoked.is_(False))
 
         if exclude_session_id:
             sessions_stmt = sessions_stmt.where(UserSession.id != exclude_session_id)

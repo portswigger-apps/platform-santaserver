@@ -1,6 +1,6 @@
 """FastAPI dependencies for authentication and authorization."""
 
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, List
 from uuid import UUID
 
 from fastapi import Depends, HTTPException, status
@@ -9,7 +9,7 @@ from sqlmodel import Session, select
 
 from app.core.database import get_db
 from app.core.security import JWTManager
-from app.models.auth import User, UserSession, Role, Group, UserRole, UserGroup, GroupRole
+from app.models.auth import User, UserSession, Role, UserRole, UserGroup, GroupRole
 
 # Bearer token security scheme
 security = HTTPBearer(auto_error=False)
@@ -40,7 +40,7 @@ async def get_current_user_optional(
     # Check if token is revoked
     jti = payload.get("jti")
     if jti:
-        session_stmt = select(UserSession).where(UserSession.token_jti == jti, UserSession.is_revoked == False)
+        session_stmt = select(UserSession).where(UserSession.token_jti == jti, UserSession.is_revoked.is_(False))
         session_result = db.exec(session_stmt).first()
         if not session_result:
             return None
@@ -55,7 +55,7 @@ async def get_current_user_optional(
     except (ValueError, TypeError):
         return None
 
-    user_stmt = select(User).where(User.id == user_uuid, User.is_active == True)
+    user_stmt = select(User).where(User.id == user_uuid, User.is_active.is_(True))
     user = db.exec(user_stmt).first()
 
     return user

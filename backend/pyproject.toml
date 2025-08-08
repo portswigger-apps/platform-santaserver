@@ -54,6 +54,7 @@ line_length = 120
 
 [tool.flake8]
 max-line-length = 120
+exclude = [".venv", "__pycache__", ".git", "build", "dist"]
 extend-ignore = ["E203", "W503"]
 
 [tool.mypy]
