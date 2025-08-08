@@ -4,7 +4,7 @@ import enum
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 from uuid import UUID, uuid4
-from sqlalchemy import String, Text, Integer, Boolean, TIMESTAMP, JSON, CheckConstraint, ForeignKey, UniqueConstraint
+from sqlalchemy import String, Text, Integer, Boolean, TIMESTAMP, JSON, CheckConstraint, ForeignKey, UniqueConstraint, Column
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlmodel import SQLModel, Field
 
@@ -35,7 +35,7 @@ class AuthProvider(SQLModel, table=True):
     is_enabled: bool = Field(default=False, description="Whether provider is currently enabled")
     
     # Provider-specific configuration (encrypted)
-    configuration: Dict[str, Any] = Field(default_factory=dict, description="Provider configuration (encrypted)")
+    configuration: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON), description="Provider configuration (encrypted)")
     
     # SCIM-specific settings
     scim_base_url: Optional[str] = Field(default=None, max_length=500, description="SCIM endpoint base URL")
@@ -106,7 +106,7 @@ class Role(SQLModel, table=True):
     name: str = Field(max_length=50, unique=True, description="Role name")
     display_name: str = Field(max_length=100, description="Human readable role name")
     description: Optional[str] = Field(default=None, description="Role description")
-    permissions: Dict[str, Any] = Field(default_factory=dict, description="Flexible permissions storage")
+    permissions: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON), description="Flexible permissions storage")
     is_system_role: bool = Field(default=False, description="Whether this is a system role")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
@@ -195,7 +195,7 @@ class SecurityAuditLog(SQLModel, table=True):
     id: UUID = Field(default_factory=uuid4, primary_key=True)
     user_id: Optional[UUID] = Field(default=None, foreign_key="users.id")
     event_type: str = Field(max_length=50, description="Type of security event")
-    event_details: Dict[str, Any] = Field(default_factory=dict, description="Event-specific details")
+    event_details: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON), description="Event-specific details")
     ip_address: Optional[str] = Field(default=None, description="Client IP address")
     user_agent: Optional[str] = Field(default=None, description="Client user agent")
     success: bool = Field(description="Whether the event was successful")
