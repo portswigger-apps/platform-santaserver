@@ -169,7 +169,7 @@ class JWTManager:
             True if expired, False otherwise
         """
         try:
-            payload = jwt.decode(token, settings.JWT_SECRET_KEY, algorithms=["HS256"])
+            jwt.decode(token, settings.JWT_SECRET_KEY, algorithms=["HS256"])
             return False  # Token is valid and not expired
         except jwt.ExpiredSignatureError:
             return True  # Token is expired

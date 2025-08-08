@@ -1,6 +1,15 @@
 """Pydantic schemas for API request/response models."""
 
-from .auth import *
+from .auth import (
+    LoginRequest,
+    LoginResponse,
+    RefreshRequest,
+    ChangePasswordRequest,
+    UserProfile,
+    UserResponse,
+    TokenResponse,
+    MessageResponse,
+)
 
 __all__ = [
     "LoginRequest",
@@ -10,4 +19,5 @@ __all__ = [
     "UserProfile",
     "UserResponse",
     "TokenResponse",
+    "MessageResponse",
 ]

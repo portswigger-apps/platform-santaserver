@@ -164,9 +164,6 @@ def client(test_db, test_admin_user):
 @pytest.fixture
 def auth_headers(test_db, test_admin_user):
     """Create authorization headers for admin user."""
-    from app.services.auth_service import AuthenticationService
-
-    auth_service = AuthenticationService(test_db)
     # Create a JWT token for the admin user
     from app.core.security import JWTManager
 
