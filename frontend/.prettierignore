@@ -1,0 +1,11 @@
+# Generated files
+.svelte-kit/
+build/
+dist/
+
+# Package manager
+node_modules/
+
+# Env
+.env
+.env.*

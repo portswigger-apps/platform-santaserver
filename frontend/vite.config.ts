@@ -11,5 +11,16 @@ export default defineConfig({
 				changeOrigin: true
 			}
 		}
+	},
+	css: {
+		preprocessorOptions: {
+			scss: {
+				// Suppress deprecation warnings from Bootstrap's internal @import usage
+				// These will be resolved when Bootstrap v6 is released
+				quietDeps: true,
+				// Suppress legacy warnings
+				silenceDeprecations: ['legacy-js-api']
+			}
+		}
 	}
 });

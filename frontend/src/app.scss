@@ -1,0 +1,78 @@
+// Import Bootstrap (Bootstrap 5.3.7 still uses @import internally - will be fixed in v6)
+// Using @use for future-proofing, but warnings persist from Bootstrap's internal @import usage
+@use 'bootstrap/scss/bootstrap' as *;
+
+// Import Bootstrap Icons (via CDN for now)
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css');
+
+// Custom styles for SantaServer
+:root {
+	--bs-primary: #2563eb;
+	--bs-secondary: #64748b;
+	--bs-success: #16a34a;
+	--bs-danger: #dc2626;
+	--bs-warning: #f59e0b;
+	--bs-info: #0ea5e9;
+	--bs-light: #f8fafc;
+	--bs-dark: #1e293b;
+}
+
+// Custom overrides
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	line-height: 1.5;
+}
+
+// Login page specific styles
+.login-page {
+	min-height: 100vh;
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-card {
+	max-width: 400px;
+	width: 100%;
+}
+
+// Dashboard specific styles
+.dashboard-layout {
+	min-height: 100vh;
+	background-color: var(--bs-light);
+}
+
+// Navigation enhancements
+.navbar-brand {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+// Custom loading spinner
+.spinner-custom {
+	width: 3rem;
+	height: 3rem;
+	border: 0.25em solid rgba(255, 255, 255, 0.25);
+	border-top: 0.25em solid white;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+// Utility classes
+.bg-gradient-primary {
+	background: linear-gradient(135deg, var(--bs-primary) 0%, #1d4ed8 100%);
+}
+
+.bg-gradient-dark {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
