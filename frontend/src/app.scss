@@ -1,5 +1,6 @@
-// Import Bootstrap
-@import 'bootstrap/scss/bootstrap';
+// Import Bootstrap (Bootstrap 5.3.7 still uses @import internally - will be fixed in v6)
+// Using @use for future-proofing, but warnings persist from Bootstrap's internal @import usage
+@use 'bootstrap/scss/bootstrap' as *;
 
 // Import Bootstrap Icons (via CDN for now)
 @import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css');
