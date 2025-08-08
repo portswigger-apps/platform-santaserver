@@ -26,30 +26,12 @@
 	<meta name="description" content="Sign in to SantaServer - Enterprise Santa Management Platform" />
 </svelte:head>
 
-<div class="login-page">
-	<div class="login-container">
-		<LoginForm />
+<div class="login-page bg-gradient-dark min-vh-100 d-flex align-items-center justify-content-center">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-sm-8 col-md-6 col-lg-4">
+				<LoginForm />
+			</div>
+		</div>
 	</div>
 </div>
-
-<style>
-	.login-page {
-		min-height: 100vh;
-		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 1rem;
-	}
-
-	.login-container {
-		width: 100%;
-		max-width: 400px;
-	}
-
-	@media (max-width: 640px) {
-		.login-page {
-			padding: 0.5rem;
-		}
-	}
-</style>

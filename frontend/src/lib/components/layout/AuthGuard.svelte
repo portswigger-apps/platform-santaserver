@@ -26,40 +26,12 @@
 </script>
 
 {#if $isLoading}
-	<div class="loading">
-		<div class="spinner"></div>
-		<p>Loading...</p>
+	<div class="d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
+		<div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+		<p class="mt-3 text-muted">Loading SantaServer...</p>
 	</div>
 {:else if $isAuthenticated && (!requiredPermission || $hasPermission(requiredPermission.resource, requiredPermission.action))}
 	<slot />
 {/if}
-
-<style>
-	.loading {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		min-height: 100vh;
-		color: #6b7280;
-	}
-
-	.spinner {
-		width: 2rem;
-		height: 2rem;
-		border: 2px solid #e5e7eb;
-		border-top: 2px solid #2563eb;
-		border-radius: 50%;
-		animation: spin 1s linear infinite;
-		margin-bottom: 1rem;
-	}
-
-	@keyframes spin {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-</style>
