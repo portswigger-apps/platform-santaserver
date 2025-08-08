@@ -2,21 +2,12 @@
 
 import enum
 from datetime import datetime
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 from uuid import UUID, uuid4
 from sqlalchemy import (
-    String,
-    Text,
-    Integer,
-    Boolean,
-    TIMESTAMP,
     JSON,
-    CheckConstraint,
-    ForeignKey,
-    UniqueConstraint,
     Column,
 )
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlmodel import SQLModel, Field
 
 
