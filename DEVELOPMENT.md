@@ -11,7 +11,7 @@ SantaServer uses a **unified container architecture** that consolidates nginx, F
 - **Communication**: Unix socket between nginx and FastAPI (`/tmp/sockets/uvicorn.sock`)
 - **Process Management**: Supervisor managing both nginx and uvicorn processes
 - **Database**: Separate PostgreSQL 17+ container
-- **Security**: All processes run as non-root nginx user (UID 101)
+- **Security**: All processes run as non-root nginx user (UID 101), nginx auth_request protection
 
 ## Development Environment
 
@@ -315,6 +315,7 @@ SantaServer implements a comprehensive JWT-based authentication system with RBAC
 - **Security**: bcrypt hashing (12 rounds), account lockout, audit logging
 - **RBAC**: Role-based permissions with admin/user roles and JSON permissions
 - **Session Management**: JTI tracking for individual token revocation
+- **Static File Protection**: nginx auth_request prevents unauthorized access to frontend routes
 
 **Key Components**:
 ```python
@@ -377,6 +378,27 @@ def test_login_success(test_client, admin_user, test_db):
     data = response.json()
     assert "access_token" in data
     assert data["user"]["username"] == admin_user.username
+```
+
+### Security Architecture
+
+**Multi-Layer Protection**:
+- **Client-Side**: Svelte authentication state management with route guards
+- **Server-Side**: nginx auth_request validates all static file access against JWT tokens
+- **API Layer**: FastAPI dependencies enforce authentication and authorization
+- **Database Layer**: Encrypted password storage and audit trail logging
+
+**nginx auth_request Flow**:
+```nginx
+location / {
+    auth_request /api/v1/auth/verify;  # Validates JWT token
+    error_page 401 = @error401;        # Redirect to login on failure
+    try_files $uri $uri/ /index.html;
+}
+
+location @error401 {
+    return 302 /login?redirect=$request_uri;
+}
 ```
 
 ### Future Extensibility

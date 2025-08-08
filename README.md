@@ -26,7 +26,7 @@ SantaServer uses a modern unified container architecture for simplified deployme
 - **Backend**: Python 3.13 with FastAPI framework, Unix socket communication
 - **Frontend**: TypeScript with SvelteKit (static build)
 - **Database**: PostgreSQL 17+ (separate container)
-- **Authentication**: JWT-based with RBAC system, extensible for SSO integration
+- **Authentication**: JWT-based with RBAC system, nginx auth_request protection, extensible for SSO integration
 - **Process Management**: Supervisor managing nginx and uvicorn
 - **Security**: Non-root execution, minimal attack surface
 
@@ -184,11 +184,13 @@ curl -X POST "http://localhost:8080/api/v1/users/" \
 
 ### Security Features
 
+- **Server-Side Protection**: nginx auth_request validates all static file access
 - **Password Policies**: 8+ chars, complexity requirements, 90-day expiration
 - **Account Lockout**: 5 failed attempts = 15-minute lockout
 - **JWT Security**: 30-minute access tokens, 7-day refresh tokens with rotation
 - **Audit Logging**: All authentication events logged with IP/user agent
 - **RBAC**: Role-based permissions (admin, user roles with JSON permissions)
+- **Route Protection**: Client-side authentication bypass prevention
 
 ## Production Deployment
 
@@ -206,6 +208,7 @@ cd backend && uv run alembic upgrade head
 - [ ] Generate secure JWT_SECRET_KEY (32+ bytes)
 - [ ] Set strong admin password
 - [ ] Configure HTTPS/TLS termination
+- [ ] Verify nginx auth_request is protecting static routes
 - [ ] Set up database connection pooling
 - [ ] Configure structured logging for audit events
 - [ ] Set up monitoring for failed login attempts
