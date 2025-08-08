@@ -64,7 +64,7 @@ async def login(
         access_token=token_pair.access_token,
         refresh_token=token_pair.refresh_token,
         token_type="bearer",
-        user=UserProfile.from_orm(user)
+        user=UserProfile.model_validate(user)
     )
 
 
@@ -170,7 +170,7 @@ async def get_current_user_profile(
     """
     Get current user profile information.
     """
-    return UserProfile.from_orm(current_user)
+    return UserProfile.model_validate(current_user)
 
 
 @router.put("/profile", response_model=UserProfile, status_code=status.HTTP_200_OK)
@@ -202,7 +202,7 @@ async def update_current_user_profile(
         db.commit()
         db.refresh(current_user)
     
-    return UserProfile.from_orm(current_user)
+    return UserProfile.model_validate(current_user)
 
 
 @router.post("/change-password", response_model=MessageResponse, status_code=status.HTTP_200_OK)
@@ -253,4 +253,4 @@ async def verify_token(
             headers={"WWW-Authenticate": "Bearer"},
         )
     
-    return UserProfile.from_orm(current_user)
+    return UserProfile.model_validate(current_user)

@@ -60,8 +60,7 @@ class UserProfile(BaseModel):
     last_login: Optional[datetime] = Field(None, description="Last login timestamp")
     user_type: str = Field(..., description="User type (local, sso, scim)")
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 class UserResponse(BaseModel):
@@ -83,8 +82,7 @@ class UserResponse(BaseModel):
     created_at: datetime = Field(..., description="Creation timestamp")
     updated_at: datetime = Field(..., description="Last update timestamp")
     
-    class Config:
-        from_attributes = True
+    model_config = {"from_attributes": True}
 
 
 class CreateUserRequest(BaseModel):

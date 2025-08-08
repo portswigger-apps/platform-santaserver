@@ -7,10 +7,16 @@ from sqlmodel import Session, create_engine
 from app.core.config import settings
 
 # Create synchronous engine for migrations and simple operations
-engine = create_engine(
-    str(settings.SQLALCHEMY_DATABASE_URI).replace("+asyncpg", ""),
-    echo=settings.ENVIRONMENT == "development"
-)
+# Use asyncpg for async operations, sqlite for testing/sync operations
+sync_url = str(settings.SQLALCHEMY_DATABASE_URI)
+if "+asyncpg" in sync_url:
+    # For production/development with PostgreSQL
+    sync_url = sync_url.replace("postgresql+asyncpg://", "postgresql://")
+else:
+    # Fallback URL
+    sync_url = "sqlite:///./test.db"
+
+engine = create_engine(sync_url, echo=settings.ENVIRONMENT == "development")
 
 # Create async engine for main application
 async_engine = create_async_engine(
