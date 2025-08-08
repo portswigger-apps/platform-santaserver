@@ -4,10 +4,10 @@ from .auth import User, Role, Group, UserRole, UserGroup, GroupRole, UserSession
 
 __all__ = [
     "User",
-    "Role", 
+    "Role",
     "Group",
     "UserRole",
-    "UserGroup", 
+    "UserGroup",
     "GroupRole",
     "UserSession",
     "SecurityAuditLog",

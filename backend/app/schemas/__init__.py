@@ -4,7 +4,7 @@ from .auth import *
 
 __all__ = [
     "LoginRequest",
-    "LoginResponse", 
+    "LoginResponse",
     "RefreshRequest",
     "ChangePasswordRequest",
     "UserProfile",

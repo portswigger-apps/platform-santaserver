@@ -61,12 +61,12 @@ class Settings(BaseSettings):
     # Security
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
-    
+
     # JWT Configuration
     JWT_SECRET_KEY: str
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 7
-    
+
     # Password Policy
     BCRYPT_ROUNDS: int = 12
     MAX_LOGIN_ATTEMPTS: int = 5
@@ -78,7 +78,7 @@ class Settings(BaseSettings):
     PASSWORD_REQUIRE_SYMBOLS: bool = True
     PASSWORD_EXPIRY_DAYS: int = 90
     PASSWORD_HISTORY_COUNT: int = 5
-    
+
     # Session Configuration
     SESSION_TIMEOUT_MINUTES: int = 480
     REFRESH_TOKEN_ROTATION: bool = True
