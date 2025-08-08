@@ -1,109 +1,65 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
-
-	let healthStatus = 'checking...';
+	import { goto } from '$app/navigation';
+	import { isAuthenticated, isLoading } from '$lib/auth/stores';
+	import { authActions } from '$lib/auth/api';
 
 	onMount(async () => {
-		try {
-			const response = await fetch('/api/v1/health');
-			const data = await response.json();
-			healthStatus = data.status;
-		} catch (error) {
-			healthStatus = 'error';
-			console.error('Health check failed:', error);
+		// Initialize auth and redirect to appropriate page
+		await authActions.initializeAuth();
+		
+		if ($isAuthenticated) {
+			goto('/dashboard');
+		} else {
+			goto('/login');
 		}
 	});
+
+	// Watch for authentication state changes
+	$: if (!$isLoading) {
+		if ($isAuthenticated) {
+			goto('/dashboard');
+		} else {
+			goto('/login');
+		}
+	}
 </script>
 
 <svelte:head>
-	<title>Dashboard - SantaServer</title>
+	<title>SantaServer - Enterprise Santa Management</title>
 </svelte:head>
 
-<div class="dashboard">
-	<h2>Dashboard</h2>
-	<div class="status-card">
-		<h3>System Status</h3>
-		<p class="status" class:healthy={healthStatus === 'healthy'} class:error={healthStatus === 'error'}>
-			{healthStatus}
-		</p>
+{#if $isLoading}
+	<div class="loading">
+		<div class="spinner"></div>
+		<p>Loading SantaServer...</p>
 	</div>
-
-	<div class="grid">
-		<div class="card">
-			<h3>Pending Approvals</h3>
-			<p class="number">0</p>
-		</div>
-
-		<div class="card">
-			<h3>Active Rules</h3>
-			<p class="number">0</p>
-		</div>
-
-		<div class="card">
-			<h3>Connected Agents</h3>
-			<p class="number">0</p>
-		</div>
-	</div>
-</div>
+{/if}
 
 <style>
-	.dashboard {
-		padding: 2rem;
-		max-width: 1200px;
-		margin: 0 auto;
-	}
-
-	h2 {
-		margin: 0 0 2rem 0;
-		color: #1f2937;
-	}
-
-	.status-card {
-		background: white;
-		border-radius: 0.5rem;
-		padding: 1.5rem;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		margin-bottom: 2rem;
-	}
-
-	.status {
-		font-size: 1.25rem;
-		font-weight: bold;
-		text-transform: capitalize;
-	}
-
-	.status.healthy {
-		color: #10b981;
-	}
-
-	.status.error {
-		color: #ef4444;
-	}
-
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 1.5rem;
-	}
-
-	.card {
-		background: white;
-		border-radius: 0.5rem;
-		padding: 1.5rem;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		text-align: center;
-	}
-
-	.card h3 {
-		margin: 0 0 1rem 0;
+	.loading {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 100vh;
 		color: #6b7280;
-		font-weight: 500;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
 	}
 
-	.number {
-		font-size: 2rem;
-		font-weight: bold;
-		color: #1f2937;
-		margin: 0;
+	.spinner {
+		width: 2rem;
+		height: 2rem;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		border-top: 2px solid white;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin-bottom: 1rem;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 </style>
