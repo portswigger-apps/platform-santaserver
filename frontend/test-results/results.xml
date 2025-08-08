@@ -1,0 +1,896 @@
+<testsuites id="" name="" tests="120" failures="11" skipped="105" errors="0" time="23.053400999999997">
+<testsuite name="auth.cleanup.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="cleanup" tests="1" failures="0" skipped="0" time="0.001" errors="0">
+<testcase name="cleanup authentication state" classname="auth.cleanup.ts" time="0.001">
+<system-out>
+<![CDATA[Cleaning up test authentication state...
+Authentication cleanup completed
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth.setup.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="setup" tests="1" failures="1" skipped="0" time="6.213" errors="0">
+<testcase name="authenticate as test user" classname="auth.setup.ts" time="6.213">
+<failure message="auth.setup.ts:12:1 authenticate as test user" type="FAILURE">
+<![CDATA[  [setup] › auth.setup.ts:12:1 › authenticate as test user ─────────────────────────────────────────
+
+    Error: Timed out 5000ms waiting for expect(locator).toBeVisible()
+
+    Locator: getByRole('heading', { name: /sign in/i })
+    Expected: visible
+    Received: <element(s) not found>
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: /sign in/i })
+
+
+      21 |   
+      22 |   // Check if login form is visible
+    > 23 |   await expect(page.getByRole('heading', { name: /sign in/i })).toBeVisible();
+         |                                                                 ^
+      24 |   
+      25 |   // Fill login form with test credentials
+      26 |   await page.getByLabel('Email').fill('admin@santaserver.dev');
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts:23:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/auth.setup.ts-authenticate-as-test-user-setup/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/auth.setup.ts-authenticate-as-test-user-setup/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/auth.setup.ts-authenticate-as-test-user-setup/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[Setting up test user authentication...
+
+[[ATTACHMENT|auth.setup.ts-authenticate-as-test-user-setup/test-failed-1.png]]
+
+[[ATTACHMENT|auth.setup.ts-authenticate-as-test-user-setup/video.webm]]
+
+[[ATTACHMENT|auth.setup.ts-authenticate-as-test-user-setup/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="auth-flow.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="chromium-auth-flow" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="Authentication Flow › Unauthenticated Access › should redirect to login when accessing root" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Unauthenticated Access › should redirect to login when accessing protected dashboard" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Unauthenticated Access › should allow direct access to login page" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should show validation errors for empty form" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should show error for invalid credentials" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should successfully login with valid credentials" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should redirect to original destination after login" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should allow access to dashboard when authenticated" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should redirect authenticated users away from login" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should allow access to root when authenticated" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Logout Process › should successfully logout" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="auth-flow.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="chromium-authenticated" tests="11" failures="0" skipped="11" time="0" errors="0">
+<testcase name="Authentication Flow › Unauthenticated Access › should redirect to login when accessing root" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Unauthenticated Access › should redirect to login when accessing protected dashboard" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Unauthenticated Access › should allow direct access to login page" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should show validation errors for empty form" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should show error for invalid credentials" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should successfully login with valid credentials" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Login Process › should redirect to original destination after login" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should allow access to dashboard when authenticated" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should redirect authenticated users away from login" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Authenticated Navigation › should allow access to root when authenticated" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Authentication Flow › Logout Process › should successfully logout" classname="auth-flow.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="chromium-authenticated" tests="13" failures="0" skipped="13" time="0" errors="0">
+<testcase name="Security Features › Server-Side Authentication Protection › should enforce server-side authentication on protected routes" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should allow access to public routes without authentication" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should protect static assets except for login page requirements" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should validate JWT tokens server-side" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Session Security › should implement proper session timeout" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Session Security › should clear session data on logout" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › XSS Protection › should sanitize input fields" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › XSS Protection › should have proper Content-Security-Policy headers" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › CSRF Protection › should include CSRF protection for state-changing requests" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Rate Limiting › should implement rate limiting on login attempts" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Input Validation › should validate email format" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Input Validation › should enforce password requirements" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="Security Features › Error Information Disclosure › should not expose sensitive information in error messages" classname="security.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ui-components.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="chromium-authenticated" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="UI Components and Styling › Login Page UI › should display proper login page layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should have proper form accessibility" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should be responsive on mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should show loading state during form submission" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should display proper navigation layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should have accessible navigation" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should be responsive in mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should display dashboard layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should have proper semantic structure" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should display error messages properly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should handle network errors gracefully" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should load Bootstrap styles correctly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should have consistent color scheme" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should maintain visual consistency across browsers" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ui-components.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="firefox" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="UI Components and Styling › Login Page UI › should display proper login page layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should have proper form accessibility" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should be responsive on mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should show loading state during form submission" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should display proper navigation layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should have accessible navigation" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should be responsive in mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should display dashboard layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should have proper semantic structure" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should display error messages properly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should handle network errors gracefully" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should load Bootstrap styles correctly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should have consistent color scheme" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should maintain visual consistency across browsers" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ui-components.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="webkit" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="UI Components and Styling › Login Page UI › should display proper login page layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should have proper form accessibility" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should be responsive on mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should show loading state during form submission" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should display proper navigation layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should have accessible navigation" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should be responsive in mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should display dashboard layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should have proper semantic structure" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should display error messages properly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should handle network errors gracefully" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should load Bootstrap styles correctly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should have consistent color scheme" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should maintain visual consistency across browsers" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ui-components.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="Mobile Chrome" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="UI Components and Styling › Login Page UI › should display proper login page layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should have proper form accessibility" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should be responsive on mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should show loading state during form submission" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should display proper navigation layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should have accessible navigation" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should be responsive in mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should display dashboard layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should have proper semantic structure" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should display error messages properly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should handle network errors gracefully" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should load Bootstrap styles correctly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should have consistent color scheme" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should maintain visual consistency across browsers" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="ui-components.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="Mobile Safari" tests="14" failures="0" skipped="14" time="0" errors="0">
+<testcase name="UI Components and Styling › Login Page UI › should display proper login page layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should have proper form accessibility" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should be responsive on mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Login Page UI › should show loading state during form submission" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should display proper navigation layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should have accessible navigation" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Navigation UI › should be responsive in mobile viewport" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should display dashboard layout" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Dashboard UI › should have proper semantic structure" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should display error messages properly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › Error Handling UI › should handle network errors gracefully" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should load Bootstrap styles correctly" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should have consistent color scheme" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+<testcase name="UI Components and Styling › CSS and Styling › should maintain visual consistency across browsers" classname="ui-components.test.ts" time="0">
+<skipped>
+</skipped>
+</testcase>
+</testsuite>
+<testsuite name="security.test.ts" timestamp="2025-08-08T15:14:38.585Z" hostname="security-tests" tests="13" failures="10" skipped="0" time="89.467" errors="0">
+<testcase name="Security Features › Server-Side Authentication Protection › should enforce server-side authentication on protected routes" classname="security.test.ts" time="5.472">
+<failure message="security.test.ts:8:5 should enforce server-side authentication on protected routes" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:8:5 › Security Features › Server-Side Authentication Protection › should enforce server-side authentication on protected routes 
+
+    Error: Timed out 5000ms waiting for expect(page).toHaveURL(expected)
+
+    Expected pattern: /.*\/login/
+    Received string:  "http://localhost:8080/"
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        9 × unexpected value "http://localhost:8080/"
+
+
+      18 |         
+      19 |         // Should redirect to login due to nginx auth_request
+    > 20 |         await expect(page).toHaveURL(/.*\/login/, { timeout: 5000 });
+         |                            ^
+      21 |       }
+      22 |     });
+      23 |
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:20:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-daba3-ication-on-protected-routes-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-daba3-ication-on-protected-routes-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-daba3-ication-on-protected-routes-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should allow access to public routes without authentication" classname="security.test.ts" time="0.459">
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should protect static assets except for login page requirements" classname="security.test.ts" time="0.474">
+</testcase>
+<testcase name="Security Features › Server-Side Authentication Protection › should validate JWT tokens server-side" classname="security.test.ts" time="0.386">
+</testcase>
+<testcase name="Security Features › Session Security › should implement proper session timeout" classname="security.test.ts" time="10.43">
+<failure message="security.test.ts:76:5 should implement proper session timeout" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:76:5 › Security Features › Session Security › should implement proper session timeout 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      78 |       
+      79 |       // Login first
+    > 80 |       await page.getByLabel('Email').fill('admin@santaserver.dev');
+         |                                      ^
+      81 |       await page.getByLabel('Password').fill('admin123!');
+      82 |       await page.getByRole('button', { name: /sign in/i }).click();
+      83 |       
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:80:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Session Security › should clear session data on logout" classname="security.test.ts" time="10.577">
+<failure message="security.test.ts:94:5 should clear session data on logout" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:94:5 › Security Features › Session Security › should clear session data on logout 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+       96 |       
+       97 |       // Login first
+    >  98 |       await page.getByLabel('Email').fill('admin@santaserver.dev');
+          |                                      ^
+       99 |       await page.getByLabel('Password').fill('admin123!');
+      100 |       await page.getByRole('button', { name: /sign in/i }).click();
+      101 |       
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:98:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-bedac-lear-session-data-on-logout-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-bedac-lear-session-data-on-logout-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-bedac-lear-session-data-on-logout-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › XSS Protection › should sanitize input fields" classname="security.test.ts" time="10.239">
+<failure message="security.test.ts:124:5 should sanitize input fields" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:124:5 › Security Features › XSS Protection › should sanitize input fields 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      128 |       const xssPayload = '<script>alert("xss")</script>';
+      129 |       
+    > 130 |       await page.getByLabel('Email').fill(xssPayload);
+          |                                      ^
+      131 |       await page.getByLabel('Password').fill('password');
+      132 |       
+      133 |       // Submit form
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:130:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › XSS Protection › should have proper Content-Security-Policy headers" classname="security.test.ts" time="0.129">
+<failure message="security.test.ts:149:5 should have proper Content-Security-Policy headers" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:149:5 › Security Features › XSS Protection › should have proper Content-Security-Policy headers 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "1; mode=block"
+    Received: undefined
+
+      156 |       expect(headers?.['x-frame-options']).toBe('SAMEORIGIN');
+      157 |       expect(headers?.['x-content-type-options']).toBe('nosniff');
+    > 158 |       expect(headers?.['x-xss-protection']).toBe('1; mode=block');
+          |                                             ^
+      159 |     });
+      160 |   });
+      161 |
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:158:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › CSRF Protection › should include CSRF protection for state-changing requests" classname="security.test.ts" time="10.234">
+<failure message="security.test.ts:165:5 should include CSRF protection for state-changing requests" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:165:5 › Security Features › CSRF Protection › should include CSRF protection for state-changing requests 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      175 |       
+      176 |       // Submit login form
+    > 177 |       await page.getByLabel('Email').fill('admin@santaserver.dev');
+          |                                      ^
+      178 |       await page.getByLabel('Password').fill('admin123!');
+      179 |       await page.getByRole('button', { name: /sign in/i }).click();
+      180 |       
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:177:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-3a92b-for-state-changing-requests-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-3a92b-for-state-changing-requests-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-3a92b-for-state-changing-requests-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Rate Limiting › should implement rate limiting on login attempts" classname="security.test.ts" time="10.264">
+<failure message="security.test.ts:189:5 should implement rate limiting on login attempts" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:189:5 › Security Features › Rate Limiting › should implement rate limiting on login attempts 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      195 |       
+      196 |       for (let i = 0; i < maxAttempts; i++) {
+    > 197 |         await page.getByLabel('Email').fill('test@example.com');
+          |                                        ^
+      198 |         await page.getByLabel('Password').fill('wrongpassword');
+      199 |         
+      200 |         // Intercept the response
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:197:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Input Validation › should validate email format" classname="security.test.ts" time="10.266">
+<failure message="security.test.ts:223:5 should validate email format" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:223:5 › Security Features › Input Validation › should validate email format 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      228 |       
+      229 |       for (const email of invalidEmails) {
+    > 230 |         await page.getByLabel('Email').fill(email);
+          |                                        ^
+      231 |         await page.getByLabel('Password').fill('password');
+      232 |         
+      233 |         const emailInput = page.getByLabel('Email');
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:230:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-e7883-hould-validate-email-format-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-e7883-hould-validate-email-format-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-e7883-hould-validate-email-format-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Input Validation › should enforce password requirements" classname="security.test.ts" time="10.268">
+<failure message="security.test.ts:247:5 should enforce password requirements" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:247:5 › Security Features › Input Validation › should enforce password requirements 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      249 |       
+      250 |       // Test with valid email and various passwords
+    > 251 |       await page.getByLabel('Email').fill('test@example.com');
+          |                                      ^
+      252 |       
+      253 |       const weakPasswords = ['', '123', 'password'];
+      254 |       
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:251:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-d9910-force-password-requirements-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-d9910-force-password-requirements-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-d9910-force-password-requirements-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-d9910-force-password-requirements-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-d9910-force-password-requirements-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-d9910-force-password-requirements-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Security Features › Error Information Disclosure › should not expose sensitive information in error messages" classname="security.test.ts" time="10.269">
+<failure message="security.test.ts:277:5 should not expose sensitive information in error messages" type="FAILURE">
+<![CDATA[  [security-tests] › security.test.ts:277:5 › Security Features › Error Information Disclosure › should not expose sensitive information in error messages 
+
+    TimeoutError: locator.fill: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Email')
+
+
+      279 |       
+      280 |       // Try login with non-existent user
+    > 281 |       await page.getByLabel('Email').fill('nonexistent@example.com');
+          |                                      ^
+      282 |       await page.getByLabel('Password').fill('password');
+      283 |       await page.getByRole('button', { name: /sign in/i }).click();
+      284 |       
+        at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:281:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/error-context.md
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|security-Security-Features-651e8-formation-in-error-messages-security-tests/test-failed-1.png]]
+
+[[ATTACHMENT|security-Security-Features-651e8-formation-in-error-messages-security-tests/video.webm]]
+
+[[ATTACHMENT|security-Security-Features-651e8-formation-in-error-messages-security-tests/error-context.md]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

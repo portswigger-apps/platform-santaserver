@@ -1,0 +1,3463 @@
+{
+  "config": {
+    "configFile": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright.config.ts",
+    "rootDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/global-setup.ts",
+    "globalTeardown": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/global-teardown.ts",
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 7
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "setup",
+        "name": "setup",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.setup\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "cleanup",
+        "name": "cleanup",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/.*\\.cleanup\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "chromium-auth-flow",
+        "name": "chromium-auth-flow",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/auth-flow\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "chromium-authenticated",
+        "name": "chromium-authenticated",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?!auth-flow).*\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/ui-components\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/ui-components\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "Mobile Chrome",
+        "name": "Mobile Chrome",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/ui-components\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "Mobile Safari",
+        "name": "Mobile Safari",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/ui-components\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 7
+        },
+        "id": "security-tests",
+        "name": "security-tests",
+        "testDir": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "/security\\.test\\.ts/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 7,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth.cleanup.ts",
+      "file": "auth.cleanup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "cleanup authentication state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "cleanup",
+              "projectName": "cleanup",
+              "results": [
+                {
+                  "workerIndex": 11,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cleaning up test authentication state...\n"
+                    },
+                    {
+                      "text": "Authentication cleanup completed\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2025-08-08T15:15:01.258Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "73d701b3bde42ede7438-c660db84f4687bf78df4",
+          "file": "auth.cleanup.ts",
+          "line": 9,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "auth.setup.ts",
+      "file": "auth.setup.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "authenticate as test user",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "setup",
+              "projectName": "setup",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6213,
+                  "error": {
+                    "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('heading', { name: /sign in/i })\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /sign in/i })\u001b[22m\n",
+                    "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('heading', { name: /sign in/i })\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /sign in/i })\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts:23:65",
+                    "location": {
+                      "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts",
+                      "column": 65,
+                      "line": 23
+                    },
+                    "snippet": "  21 |   \n  22 |   // Check if login form is visible\n> 23 |   await expect(page.getByRole('heading', { name: /sign in/i })).toBeVisible();\n     |                                                                 ^\n  24 |   \n  25 |   // Fill login form with test credentials\n  26 |   await page.getByLabel('Email').fill('admin@santaserver.dev');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts",
+                        "column": 65,
+                        "line": 23
+                      },
+                      "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m\n\nLocator: getByRole('heading', { name: /sign in/i })\nExpected: visible\nReceived: <element(s) not found>\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: /sign in/i })\u001b[22m\n\n\n  21 |   \n  22 |   // Check if login form is visible\n> 23 |   await expect(page.getByRole('heading', { name: /sign in/i })).toBeVisible();\n     |                                                                 ^\n  24 |   \n  25 |   // Fill login form with test credentials\n  26 |   await page.getByLabel('Email').fill('admin@santaserver.dev');\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts:23:65"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "Setting up test user authentication...\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2025-08-08T15:14:39.035Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/auth.setup.ts-authenticate-as-test-user-setup/test-failed-1.png"
+                    },
+                    {
+                      "name": "video",
+                      "contentType": "video/webm",
+                      "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/auth.setup.ts-authenticate-as-test-user-setup/video.webm"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/auth.setup.ts-authenticate-as-test-user-setup/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/auth.setup.ts",
+                    "column": 65,
+                    "line": 23
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "17e3fe6f4d9d8bd79c6b-7ae616255f2fad00d7ee",
+          "file": "auth.setup.ts",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "auth-flow.test.ts",
+      "file": "auth-flow.test.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication Flow",
+          "file": "auth-flow.test.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Unauthenticated Access",
+              "file": "auth-flow.test.ts",
+              "line": 4,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should redirect to login when accessing root",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-c189aa4e3a1ed520002e",
+                  "file": "auth-flow.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect to login when accessing protected dashboard",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-1c67b066208bb6ba59fb",
+                  "file": "auth-flow.test.ts",
+                  "line": 21,
+                  "column": 5
+                },
+                {
+                  "title": "should allow direct access to login page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-b00fd50806477d6dd4c6",
+                  "file": "auth-flow.test.ts",
+                  "line": 31,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect to login when accessing root",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-9d47dca4b183a1da287f",
+                  "file": "auth-flow.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect to login when accessing protected dashboard",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-b5f38f36182a953dc05a",
+                  "file": "auth-flow.test.ts",
+                  "line": 21,
+                  "column": 5
+                },
+                {
+                  "title": "should allow direct access to login page",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-bfa92169927a4e5a8429",
+                  "file": "auth-flow.test.ts",
+                  "line": 31,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Login Process",
+              "file": "auth-flow.test.ts",
+              "line": 44,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should show validation errors for empty form",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-b80d50f9ebb7c49bec6f",
+                  "file": "auth-flow.test.ts",
+                  "line": 48,
+                  "column": 5
+                },
+                {
+                  "title": "should show error for invalid credentials",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-aaa3d3c467d2abc42361",
+                  "file": "auth-flow.test.ts",
+                  "line": 60,
+                  "column": 5
+                },
+                {
+                  "title": "should successfully login with valid credentials",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-e8aeec7ae17d5e786508",
+                  "file": "auth-flow.test.ts",
+                  "line": 77,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect to original destination after login",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-073383920124200f8b67",
+                  "file": "auth-flow.test.ts",
+                  "line": 97,
+                  "column": 5
+                },
+                {
+                  "title": "should show validation errors for empty form",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-4a39c9ccec09435cbcb6",
+                  "file": "auth-flow.test.ts",
+                  "line": 48,
+                  "column": 5
+                },
+                {
+                  "title": "should show error for invalid credentials",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-fef2c5b5de55bd1c2b75",
+                  "file": "auth-flow.test.ts",
+                  "line": 60,
+                  "column": 5
+                },
+                {
+                  "title": "should successfully login with valid credentials",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-d0d7974e12cb3f37a5bd",
+                  "file": "auth-flow.test.ts",
+                  "line": 77,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect to original destination after login",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-ab2f56a7d86c7ff4cdc2",
+                  "file": "auth-flow.test.ts",
+                  "line": 97,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Authenticated Navigation",
+              "file": "auth-flow.test.ts",
+              "line": 115,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should allow access to dashboard when authenticated",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-e9a8bc64e4042818b990",
+                  "file": "auth-flow.test.ts",
+                  "line": 119,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect authenticated users away from login",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-72eeb818274aaa1dcf24",
+                  "file": "auth-flow.test.ts",
+                  "line": 132,
+                  "column": 5
+                },
+                {
+                  "title": "should allow access to root when authenticated",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-64fdf3ab9b42b0649252",
+                  "file": "auth-flow.test.ts",
+                  "line": 142,
+                  "column": 5
+                },
+                {
+                  "title": "should allow access to dashboard when authenticated",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-847b3a8709eea16e1080",
+                  "file": "auth-flow.test.ts",
+                  "line": 119,
+                  "column": 5
+                },
+                {
+                  "title": "should redirect authenticated users away from login",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-d956fab301ed07f31ba1",
+                  "file": "auth-flow.test.ts",
+                  "line": 132,
+                  "column": 5
+                },
+                {
+                  "title": "should allow access to root when authenticated",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-1e4e8fe2f4ca1dd6f2dc",
+                  "file": "auth-flow.test.ts",
+                  "line": 142,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Logout Process",
+              "file": "auth-flow.test.ts",
+              "line": 151,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should successfully logout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-auth-flow",
+                      "projectName": "chromium-auth-flow",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-1195c49ec881b00118fc",
+                  "file": "auth-flow.test.ts",
+                  "line": 155,
+                  "column": 5
+                },
+                {
+                  "title": "should successfully logout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f3b2e986fc758129f61-a75a5ffa90bd1a4d8707",
+                  "file": "auth-flow.test.ts",
+                  "line": 155,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "security.test.ts",
+      "file": "security.test.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Security Features",
+          "file": "security.test.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Server-Side Authentication Protection",
+              "file": "security.test.ts",
+              "line": 4,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should enforce server-side authentication on protected routes",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-e388e20671cf4a761dc5",
+                  "file": "security.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should allow access to public routes without authentication",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-0b747d232d19cc9af64d",
+                  "file": "security.test.ts",
+                  "line": 24,
+                  "column": 5
+                },
+                {
+                  "title": "should protect static assets except for login page requirements",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-d6795a8b94cd89a7d0db",
+                  "file": "security.test.ts",
+                  "line": 43,
+                  "column": 5
+                },
+                {
+                  "title": "should validate JWT tokens server-side",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-6e33933f870704c0a9bd",
+                  "file": "security.test.ts",
+                  "line": 58,
+                  "column": 5
+                },
+                {
+                  "title": "should enforce server-side authentication on protected routes",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 1,
+                          "status": "failed",
+                          "duration": 5472,
+                          "error": {
+                            "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/.*\\/login/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:8080/\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8080/\"\u001b[22m\n",
+                            "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/.*\\/login/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:8080/\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8080/\"\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:20:28",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 28,
+                              "line": 20
+                            },
+                            "snippet": "  18 |         \n  19 |         // Should redirect to login due to nginx auth_request\n> 20 |         await expect(page).toHaveURL(/.*\\/login/, { timeout: 5000 });\n     |                            ^\n  21 |       }\n  22 |     });\n  23 |"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 28,
+                                "line": 20
+                              },
+                              "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/.*\\/login/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:8080/\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8080/\"\u001b[22m\n\n\n  18 |         \n  19 |         // Should redirect to login due to nginx auth_request\n> 20 |         await expect(page).toHaveURL(/.*\\/login/, { timeout: 5000 });\n     |                            ^\n  21 |       }\n  22 |     });\n  23 |\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:20:28"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.070Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-daba3-ication-on-protected-routes-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 28,
+                            "line": 20
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-bb507064062afe6be8ed",
+                  "file": "security.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should allow access to public routes without authentication",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "passed",
+                          "duration": 459,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.070Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-cf373e5f7f5b38d04ceb",
+                  "file": "security.test.ts",
+                  "line": 24,
+                  "column": 5
+                },
+                {
+                  "title": "should protect static assets except for login page requirements",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "passed",
+                          "duration": 474,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.061Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-cea5143eb0ae876ab320",
+                  "file": "security.test.ts",
+                  "line": 43,
+                  "column": 5
+                },
+                {
+                  "title": "should validate JWT tokens server-side",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 4,
+                          "status": "passed",
+                          "duration": 386,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.070Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-def690a6226d8c6ab114",
+                  "file": "security.test.ts",
+                  "line": 58,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Session Security",
+              "file": "security.test.ts",
+              "line": 73,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should implement proper session timeout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-72b5b2327ea2ce668364",
+                  "file": "security.test.ts",
+                  "line": 76,
+                  "column": 5
+                },
+                {
+                  "title": "should clear session data on logout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-91ac4dcee80fda14af53",
+                  "file": "security.test.ts",
+                  "line": 94,
+                  "column": 5
+                },
+                {
+                  "title": "should implement proper session timeout",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 5,
+                          "parallelIndex": 5,
+                          "status": "failed",
+                          "duration": 10430,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:80:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 80
+                            },
+                            "snippet": "  78 |       \n  79 |       // Login first\n> 80 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n     |                                      ^\n  81 |       await page.getByLabel('Password').fill('admin123!');\n  82 |       await page.getByRole('button', { name: /sign in/i }).click();\n  83 |       "
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 80
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  78 |       \n  79 |       // Login first\n> 80 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n     |                                      ^\n  81 |       await page.getByLabel('Password').fill('admin123!');\n  82 |       await page.getByRole('button', { name: /sign in/i }).click();\n  83 |       \n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:80:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.061Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d0c83-ment-proper-session-timeout-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 80
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-2521d262f1b003ac6b05",
+                  "file": "security.test.ts",
+                  "line": 76,
+                  "column": 5
+                },
+                {
+                  "title": "should clear session data on logout",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 6,
+                          "status": "failed",
+                          "duration": 10577,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:98:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 98
+                            },
+                            "snippet": "   96 |       \n   97 |       // Login first\n>  98 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n      |                                      ^\n   99 |       await page.getByLabel('Password').fill('admin123!');\n  100 |       await page.getByRole('button', { name: /sign in/i }).click();\n  101 |       "
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 98
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n   96 |       \n   97 |       // Login first\n>  98 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n      |                                      ^\n   99 |       await page.getByLabel('Password').fill('admin123!');\n  100 |       await page.getByRole('button', { name: /sign in/i }).click();\n  101 |       \n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:98:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.061Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-bedac-lear-session-data-on-logout-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 98
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-b46d0f3d442e99018fb1",
+                  "file": "security.test.ts",
+                  "line": 94,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "XSS Protection",
+              "file": "security.test.ts",
+              "line": 121,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should sanitize input fields",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-959b5e76b2c97229f0cb",
+                  "file": "security.test.ts",
+                  "line": 124,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper Content-Security-Policy headers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-d5999dd6243e57882fb5",
+                  "file": "security.test.ts",
+                  "line": 149,
+                  "column": 5
+                },
+                {
+                  "title": "should sanitize input fields",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 4,
+                          "status": "failed",
+                          "duration": 10239,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:130:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 130
+                            },
+                            "snippet": "  128 |       const xssPayload = '<script>alert(\"xss\")</script>';\n  129 |       \n> 130 |       await page.getByLabel('Email').fill(xssPayload);\n      |                                      ^\n  131 |       await page.getByLabel('Password').fill('password');\n  132 |       \n  133 |       // Submit form"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 130
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  128 |       const xssPayload = '<script>alert(\"xss\")</script>';\n  129 |       \n> 130 |       await page.getByLabel('Email').fill(xssPayload);\n      |                                      ^\n  131 |       await page.getByLabel('Password').fill('password');\n  132 |       \n  133 |       // Submit form\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:130:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.751Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-4920b-hould-sanitize-input-fields-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 130
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-7f1c5db4a7b8da99b4a0",
+                  "file": "security.test.ts",
+                  "line": 124,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper Content-Security-Policy headers",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 3,
+                          "status": "failed",
+                          "duration": 129,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"1; mode=block\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"1; mode=block\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:158:45",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 45,
+                              "line": 158
+                            },
+                            "snippet": "  156 |       expect(headers?.['x-frame-options']).toBe('SAMEORIGIN');\n  157 |       expect(headers?.['x-content-type-options']).toBe('nosniff');\n> 158 |       expect(headers?.['x-xss-protection']).toBe('1; mode=block');\n      |                                             ^\n  159 |     });\n  160 |   });\n  161 |"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 45,
+                                "line": 158
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"1; mode=block\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n\n  156 |       expect(headers?.['x-frame-options']).toBe('SAMEORIGIN');\n  157 |       expect(headers?.['x-content-type-options']).toBe('nosniff');\n> 158 |       expect(headers?.['x-xss-protection']).toBe('1; mode=block');\n      |                                             ^\n  159 |     });\n  160 |   });\n  161 |\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:158:45"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.836Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-8389c-ent-Security-Policy-headers-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 45,
+                            "line": 158
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-c04ccc9a42ace74b3ccb",
+                  "file": "security.test.ts",
+                  "line": 149,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "CSRF Protection",
+              "file": "security.test.ts",
+              "line": 162,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should include CSRF protection for state-changing requests",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-04d95cb07937799b722d",
+                  "file": "security.test.ts",
+                  "line": 165,
+                  "column": 5
+                },
+                {
+                  "title": "should include CSRF protection for state-changing requests",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 2,
+                          "status": "failed",
+                          "duration": 10234,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:177:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 177
+                            },
+                            "snippet": "  175 |       \n  176 |       // Submit login form\n> 177 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n      |                                      ^\n  178 |       await page.getByLabel('Password').fill('admin123!');\n  179 |       await page.getByRole('button', { name: /sign in/i }).click();\n  180 |       "
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 177
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  175 |       \n  176 |       // Submit login form\n> 177 |       await page.getByLabel('Email').fill('admin@santaserver.dev');\n      |                                      ^\n  178 |       await page.getByLabel('Password').fill('admin123!');\n  179 |       await page.getByRole('button', { name: /sign in/i }).click();\n  180 |       \n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:177:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:39.852Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-3a92b-for-state-changing-requests-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 177
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-00100b9a7a895592830b",
+                  "file": "security.test.ts",
+                  "line": 165,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Rate Limiting",
+              "file": "security.test.ts",
+              "line": 186,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should implement rate limiting on login attempts",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-3322e54157732789724f",
+                  "file": "security.test.ts",
+                  "line": 189,
+                  "column": 5
+                },
+                {
+                  "title": "should implement rate limiting on login attempts",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 3,
+                          "status": "failed",
+                          "duration": 10264,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:197:40",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 40,
+                              "line": 197
+                            },
+                            "snippet": "  195 |       \n  196 |       for (let i = 0; i < maxAttempts; i++) {\n> 197 |         await page.getByLabel('Email').fill('test@example.com');\n      |                                        ^\n  198 |         await page.getByLabel('Password').fill('wrongpassword');\n  199 |         \n  200 |         // Intercept the response"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 40,
+                                "line": 197
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  195 |       \n  196 |       for (let i = 0; i < maxAttempts; i++) {\n> 197 |         await page.getByLabel('Email').fill('test@example.com');\n      |                                        ^\n  198 |         await page.getByLabel('Password').fill('wrongpassword');\n  199 |         \n  200 |         // Intercept the response\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:197:40"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:40.362Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-6c3fd--limiting-on-login-attempts-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 40,
+                            "line": 197
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-122c063367f238f1dda6",
+                  "file": "security.test.ts",
+                  "line": 189,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Input Validation",
+              "file": "security.test.ts",
+              "line": 220,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should validate email format",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-f2d4f4e37b9916d4cf9d",
+                  "file": "security.test.ts",
+                  "line": 223,
+                  "column": 5
+                },
+                {
+                  "title": "should enforce password requirements",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-3b5ead54e194d6f7778b",
+                  "file": "security.test.ts",
+                  "line": 247,
+                  "column": 5
+                },
+                {
+                  "title": "should validate email format",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 8,
+                          "parallelIndex": 1,
+                          "status": "failed",
+                          "duration": 10266,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:230:40",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 40,
+                              "line": 230
+                            },
+                            "snippet": "  228 |       \n  229 |       for (const email of invalidEmails) {\n> 230 |         await page.getByLabel('Email').fill(email);\n      |                                        ^\n  231 |         await page.getByLabel('Password').fill('password');\n  232 |         \n  233 |         const emailInput = page.getByLabel('Email');"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 40,
+                                "line": 230
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  228 |       \n  229 |       for (const email of invalidEmails) {\n> 230 |         await page.getByLabel('Email').fill(email);\n      |                                        ^\n  231 |         await page.getByLabel('Password').fill('password');\n  232 |         \n  233 |         const emailInput = page.getByLabel('Email');\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:230:40"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:45.459Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-e7883-hould-validate-email-format-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 40,
+                            "line": 230
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-49955a50a2c6ee82aa40",
+                  "file": "security.test.ts",
+                  "line": 223,
+                  "column": 5
+                },
+                {
+                  "title": "should enforce password requirements",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 9,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 10268,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:251:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 251
+                            },
+                            "snippet": "  249 |       \n  250 |       // Test with valid email and various passwords\n> 251 |       await page.getByLabel('Email').fill('test@example.com');\n      |                                      ^\n  252 |       \n  253 |       const weakPasswords = ['', '123', 'password'];\n  254 |       "
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 251
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  249 |       \n  250 |       // Test with valid email and various passwords\n> 251 |       await page.getByLabel('Email').fill('test@example.com');\n      |                                      ^\n  252 |       \n  253 |       const weakPasswords = ['', '123', 'password'];\n  254 |       \n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:251:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:46.082Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d9910-force-password-requirements-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d9910-force-password-requirements-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-d9910-force-password-requirements-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 251
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-52da0c5ba36eeefdb0bf",
+                  "file": "security.test.ts",
+                  "line": 247,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Error Information Disclosure",
+              "file": "security.test.ts",
+              "line": 274,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should not expose sensitive information in error messages",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-d16557fc3f1a7b198bf1",
+                  "file": "security.test.ts",
+                  "line": 277,
+                  "column": 5
+                },
+                {
+                  "title": "should not expose sensitive information in error messages",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "security-tests",
+                      "projectName": "security-tests",
+                      "results": [
+                        {
+                          "workerIndex": 10,
+                          "parallelIndex": 5,
+                          "status": "failed",
+                          "duration": 10269,
+                          "error": {
+                            "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n",
+                            "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:281:38",
+                            "location": {
+                              "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                              "column": 38,
+                              "line": 281
+                            },
+                            "snippet": "  279 |       \n  280 |       // Try login with non-existent user\n> 281 |       await page.getByLabel('Email').fill('nonexistent@example.com');\n      |                                      ^\n  282 |       await page.getByLabel('Password').fill('password');\n  283 |       await page.getByRole('button', { name: /sign in/i }).click();\n  284 |       "
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                                "column": 38,
+                                "line": 281
+                              },
+                              "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Email')\u001b[22m\n\n\n  279 |       \n  280 |       // Try login with non-existent user\n> 281 |       await page.getByLabel('Email').fill('nonexistent@example.com');\n      |                                      ^\n  282 |       await page.getByLabel('Password').fill('password');\n  283 |       await page.getByRole('button', { name: /sign in/i }).click();\n  284 |       \n    at /Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts:281:38"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2025-08-08T15:14:50.335Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/test-results/security-Security-Features-651e8-formation-in-error-messages-security-tests/error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "/Users/tim.birkett/Projects/portswigger-apps/platform-santaserver/frontend/playwright/security.test.ts",
+                            "column": 38,
+                            "line": 281
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "0f11de04c687963bfeb3-52f434668681dfbec39f",
+                  "file": "security.test.ts",
+                  "line": 277,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ui-components.test.ts",
+      "file": "ui-components.test.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "UI Components and Styling",
+          "file": "ui-components.test.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "Login Page UI",
+              "file": "ui-components.test.ts",
+              "line": 4,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should display proper login page layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-feed35b1caa9d3068ab6",
+                  "file": "ui-components.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper form accessibility",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-7bd9aa971e46c27c8f45",
+                  "file": "ui-components.test.ts",
+                  "line": 22,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-3a23bba51143dc2a0115",
+                  "file": "ui-components.test.ts",
+                  "line": 42,
+                  "column": 5
+                },
+                {
+                  "title": "should show loading state during form submission",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-7f4037eb9a9c9947eb8a",
+                  "file": "ui-components.test.ts",
+                  "line": 57,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper login page layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-e3769bfd1cd2a309ac6b",
+                  "file": "ui-components.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper form accessibility",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-1f5a5c61d6d65080eff9",
+                  "file": "ui-components.test.ts",
+                  "line": 22,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-39dc8ded15a687376b7e",
+                  "file": "ui-components.test.ts",
+                  "line": 42,
+                  "column": 5
+                },
+                {
+                  "title": "should show loading state during form submission",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-516e949e565a51daade9",
+                  "file": "ui-components.test.ts",
+                  "line": 57,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper login page layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-bbf5732176042707ae01",
+                  "file": "ui-components.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper form accessibility",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-6e3145512912b5b59e96",
+                  "file": "ui-components.test.ts",
+                  "line": 22,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-34c9497a453b55e59542",
+                  "file": "ui-components.test.ts",
+                  "line": 42,
+                  "column": 5
+                },
+                {
+                  "title": "should show loading state during form submission",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-edd34c61a34881b9dfdb",
+                  "file": "ui-components.test.ts",
+                  "line": 57,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper login page layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-297a5832a214b95c7f49",
+                  "file": "ui-components.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper form accessibility",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-b767d61e456ccfb9e207",
+                  "file": "ui-components.test.ts",
+                  "line": 22,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-eb8a8416596f2cdaa46b",
+                  "file": "ui-components.test.ts",
+                  "line": 42,
+                  "column": 5
+                },
+                {
+                  "title": "should show loading state during form submission",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-781a2e2df745305db020",
+                  "file": "ui-components.test.ts",
+                  "line": 57,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper login page layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-bfd6458e7fc5919243f1",
+                  "file": "ui-components.test.ts",
+                  "line": 8,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper form accessibility",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-7fb36e119b8ff61b4582",
+                  "file": "ui-components.test.ts",
+                  "line": 22,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive on mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-20eceae5f45eebbd1418",
+                  "file": "ui-components.test.ts",
+                  "line": 42,
+                  "column": 5
+                },
+                {
+                  "title": "should show loading state during form submission",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-dcf9e6e0b5ecb95ad89b",
+                  "file": "ui-components.test.ts",
+                  "line": 57,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Navigation UI",
+              "file": "ui-components.test.ts",
+              "line": 74,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should display proper navigation layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-8eb4c79694714443a2cb",
+                  "file": "ui-components.test.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "should have accessible navigation",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-5de3a0e1574293c1128d",
+                  "file": "ui-components.test.ts",
+                  "line": 89,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive in mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-9cd9acb72dbb3ffa194c",
+                  "file": "ui-components.test.ts",
+                  "line": 105,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper navigation layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-02b1db04b8f474e7922d",
+                  "file": "ui-components.test.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "should have accessible navigation",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-1a4330c15c8b05c09461",
+                  "file": "ui-components.test.ts",
+                  "line": 89,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive in mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-9f6cbdcc9f9915dd9d33",
+                  "file": "ui-components.test.ts",
+                  "line": 105,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper navigation layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c9a24463ef1c2fe09782",
+                  "file": "ui-components.test.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "should have accessible navigation",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-a784127f140301cf318d",
+                  "file": "ui-components.test.ts",
+                  "line": 89,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive in mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-39a0e88cd5dacefe666a",
+                  "file": "ui-components.test.ts",
+                  "line": 105,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper navigation layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-a2a35bd3ef7eb32ec56a",
+                  "file": "ui-components.test.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "should have accessible navigation",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-b4609f8181a3f0a9ae37",
+                  "file": "ui-components.test.ts",
+                  "line": 89,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive in mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-127965015071a0277a8f",
+                  "file": "ui-components.test.ts",
+                  "line": 105,
+                  "column": 5
+                },
+                {
+                  "title": "should display proper navigation layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c12f1a78a9f134cd82f1",
+                  "file": "ui-components.test.ts",
+                  "line": 78,
+                  "column": 5
+                },
+                {
+                  "title": "should have accessible navigation",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-45e615944053c9068b2d",
+                  "file": "ui-components.test.ts",
+                  "line": 89,
+                  "column": 5
+                },
+                {
+                  "title": "should be responsive in mobile viewport",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-eabe2d52154e8df08b3c",
+                  "file": "ui-components.test.ts",
+                  "line": 105,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Dashboard UI",
+              "file": "ui-components.test.ts",
+              "line": 116,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should display dashboard layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c0866ac23bbf11aa0586",
+                  "file": "ui-components.test.ts",
+                  "line": 120,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper semantic structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-666c80b9048311e81abc",
+                  "file": "ui-components.test.ts",
+                  "line": 131,
+                  "column": 5
+                },
+                {
+                  "title": "should display dashboard layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-6191752e22243d1ec8f7",
+                  "file": "ui-components.test.ts",
+                  "line": 120,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper semantic structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-1fb73a8acb9b17e29137",
+                  "file": "ui-components.test.ts",
+                  "line": 131,
+                  "column": 5
+                },
+                {
+                  "title": "should display dashboard layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-ae122871346174d14d40",
+                  "file": "ui-components.test.ts",
+                  "line": 120,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper semantic structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-9b3d13cd68f1b9d51208",
+                  "file": "ui-components.test.ts",
+                  "line": 131,
+                  "column": 5
+                },
+                {
+                  "title": "should display dashboard layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-082c3d086a1dc3681d3c",
+                  "file": "ui-components.test.ts",
+                  "line": 120,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper semantic structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-6f8e734e1f151a6f99fa",
+                  "file": "ui-components.test.ts",
+                  "line": 131,
+                  "column": 5
+                },
+                {
+                  "title": "should display dashboard layout",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-209a5f92ea8443870766",
+                  "file": "ui-components.test.ts",
+                  "line": 120,
+                  "column": 5
+                },
+                {
+                  "title": "should have proper semantic structure",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-341102f902143b6cb7fa",
+                  "file": "ui-components.test.ts",
+                  "line": 131,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "Error Handling UI",
+              "file": "ui-components.test.ts",
+              "line": 148,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should display error messages properly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-db8bf0ba88de71438353",
+                  "file": "ui-components.test.ts",
+                  "line": 152,
+                  "column": 5
+                },
+                {
+                  "title": "should handle network errors gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-93609ab0e8d758450a40",
+                  "file": "ui-components.test.ts",
+                  "line": 168,
+                  "column": 5
+                },
+                {
+                  "title": "should display error messages properly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-4331cae8c2084c4dfd16",
+                  "file": "ui-components.test.ts",
+                  "line": 152,
+                  "column": 5
+                },
+                {
+                  "title": "should handle network errors gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c7ecca746a6212eb44cf",
+                  "file": "ui-components.test.ts",
+                  "line": 168,
+                  "column": 5
+                },
+                {
+                  "title": "should display error messages properly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-3a386384616494e95164",
+                  "file": "ui-components.test.ts",
+                  "line": 152,
+                  "column": 5
+                },
+                {
+                  "title": "should handle network errors gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-b9bdeabcbb45ba1203ec",
+                  "file": "ui-components.test.ts",
+                  "line": 168,
+                  "column": 5
+                },
+                {
+                  "title": "should display error messages properly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-815dc8328454ed66db3b",
+                  "file": "ui-components.test.ts",
+                  "line": 152,
+                  "column": 5
+                },
+                {
+                  "title": "should handle network errors gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c326b26f8804bb58325a",
+                  "file": "ui-components.test.ts",
+                  "line": 168,
+                  "column": 5
+                },
+                {
+                  "title": "should display error messages properly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-4098b4f9de188ff0b14c",
+                  "file": "ui-components.test.ts",
+                  "line": 152,
+                  "column": 5
+                },
+                {
+                  "title": "should handle network errors gracefully",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-c73acbc161ce035447b6",
+                  "file": "ui-components.test.ts",
+                  "line": 168,
+                  "column": 5
+                }
+              ]
+            },
+            {
+              "title": "CSS and Styling",
+              "file": "ui-components.test.ts",
+              "line": 190,
+              "column": 8,
+              "specs": [
+                {
+                  "title": "should load Bootstrap styles correctly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-f15658b0c5288aedb884",
+                  "file": "ui-components.test.ts",
+                  "line": 193,
+                  "column": 5
+                },
+                {
+                  "title": "should have consistent color scheme",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-e6e3c45506b55dc66884",
+                  "file": "ui-components.test.ts",
+                  "line": 207,
+                  "column": 5
+                },
+                {
+                  "title": "should maintain visual consistency across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium-authenticated",
+                      "projectName": "chromium-authenticated",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-a95707f9f567b5602478",
+                  "file": "ui-components.test.ts",
+                  "line": 219,
+                  "column": 5
+                },
+                {
+                  "title": "should load Bootstrap styles correctly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-3637aeff6a9934c6a19d",
+                  "file": "ui-components.test.ts",
+                  "line": 193,
+                  "column": 5
+                },
+                {
+                  "title": "should have consistent color scheme",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-e08423ea1095c340eba9",
+                  "file": "ui-components.test.ts",
+                  "line": 207,
+                  "column": 5
+                },
+                {
+                  "title": "should maintain visual consistency across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "firefox",
+                      "projectName": "firefox",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-bce8069aab1196cbc34e",
+                  "file": "ui-components.test.ts",
+                  "line": 219,
+                  "column": 5
+                },
+                {
+                  "title": "should load Bootstrap styles correctly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-43f0fab5174d1438f08b",
+                  "file": "ui-components.test.ts",
+                  "line": 193,
+                  "column": 5
+                },
+                {
+                  "title": "should have consistent color scheme",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-76fea923f12f847208ef",
+                  "file": "ui-components.test.ts",
+                  "line": 207,
+                  "column": 5
+                },
+                {
+                  "title": "should maintain visual consistency across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "webkit",
+                      "projectName": "webkit",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-11dab9a7cd1ce021bdfc",
+                  "file": "ui-components.test.ts",
+                  "line": 219,
+                  "column": 5
+                },
+                {
+                  "title": "should load Bootstrap styles correctly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-0fe0edb089c160787eca",
+                  "file": "ui-components.test.ts",
+                  "line": 193,
+                  "column": 5
+                },
+                {
+                  "title": "should have consistent color scheme",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-a6e13efd5d8e69479796",
+                  "file": "ui-components.test.ts",
+                  "line": 207,
+                  "column": 5
+                },
+                {
+                  "title": "should maintain visual consistency across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Chrome",
+                      "projectName": "Mobile Chrome",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-f45699faace651972614",
+                  "file": "ui-components.test.ts",
+                  "line": 219,
+                  "column": 5
+                },
+                {
+                  "title": "should load Bootstrap styles correctly",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-649e604f75b97415225a",
+                  "file": "ui-components.test.ts",
+                  "line": 193,
+                  "column": 5
+                },
+                {
+                  "title": "should have consistent color scheme",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-cf96d2760925288f0a84",
+                  "file": "ui-components.test.ts",
+                  "line": 207,
+                  "column": 5
+                },
+                {
+                  "title": "should maintain visual consistency across browsers",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 30000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "Mobile Safari",
+                      "projectName": "Mobile Safari",
+                      "results": [],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "20fe6f0e128a71f02475-a3ce8595c3337b44f349",
+                  "file": "ui-components.test.ts",
+                  "line": 219,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-08T15:14:38.221Z",
+    "duration": 23053.400999999998,
+    "expected": 4,
+    "skipped": 105,
+    "unexpected": 11,
+    "flaky": 0
+  }
+}
